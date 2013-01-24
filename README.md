@@ -1,12 +1,12 @@
 ## Go Tour Korean App Engine version.
 
-Korean: [http://go-tour-kr.appspot.com](http://go-tour-kr.appspot.com)
-English: [http://tour.golang.org](http://tour.golang.org)  
+Korean: [http://go-tour-kr.appspot.com](http://go-tour-kr.appspot.com)  
+English: [http://tour.golang.org](http://tour.golang.org)
 
 Korean translation: [http://github.com/golanger/go-tour-translator](http://github.com/golanger/go-tour-translator)
 
 
-**Below is the original Go Tour App Engine README file.**
+*Below is the original Go Tour App Engine README file.*
 ----------
 This is the App Engine version of the Go Playground.
 
