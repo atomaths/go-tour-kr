@@ -398,11 +398,11 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Variables</h2>
+  <h2>변수 (Variables)</h2>
   
   
   <p>
-    The <code>var</code> statement declares a list of variables; as in function argument lists, the type is last.
+    <code>var</code> 문장은 변수를 선언합니다. 함수의 매개변수 처럼 타입은 문장 끝에 명시합니다.
   </p>
   
 
@@ -424,17 +424,17 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Variables with initializers</h2>
+  <h2>변수의 초기화</h2>
   
   
   <p>
-    A var declaration can include initializers, one per variable.
+    변수 선언과 함께 변수 마다 초기화를 할 수 있습니다.
   </p>
   
 
   
   <p>
-    If an initializer is present, the type can be omitted; the variable will take the type of the initializer.
+    초기화를 하는 경우 타입(type)을 생략할 수 있습니다. 변수는 초기화 하고자 하는 값에 따라 타입이 결정됩니다.
   </p>
   
 
@@ -456,17 +456,17 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Short variable declarations</h2>
+  <h2>변수의 짧은 선언</h2>
   
   
   <p>
-    Inside a function, the <code>:=</code> short assignment statement can be used in place of a <code>var</code> declaration with implicit type.
+    함수 내에서 <code>:=</code> 할당을 `var`과 명시적인 타입(e.g. int, bool) 선언 대신 사용할 수 있습니다.
   </p>
   
 
   
   <p>
-    (Outside a function, every construct begins with a keyword and the <code>:=</code> construct is not available.)
+    (함수 밖의 모든 문장의 구조는 키워드로 시작하고, <code>:=</code> 선언은 사용할 수 없습니다.)
   </p>
   
 
@@ -575,13 +575,13 @@ func main() {
   
   
   <p>
-    Go has only one looping construct, the <code>for</code> loop.
+    Go 언어는 반복문이 &apos;for&apos;밖에 없습니다.
   </p>
   
 
   
   <p>
-    The basic <code>for</code> loop looks as it does in C or Java, except that the <code>( )</code> are gone (they are not even optional) and the <code>{ }</code> are required.
+    기본적인 &apos;for&apos; 반복문은 C와 Java 언어와 거의 유사합니다. 다른점은 소괄호 ( )를 사용하지 않습니다. 하지만 중괄호 { } 는 필요합니다.
   </p>
   
 
@@ -608,7 +608,7 @@ func main() {
   
   
   <p>
-    As in C or Java, you can leave the pre and post statements empty.
+    C와 Java 언어 처럼, 조건문을 제외한 앞 뒤의 문장은 비워도 됩니다.
   </p>
   
 
@@ -635,7 +635,7 @@ func main() {
   
   
   <p>
-    At that point you can drop the semicolons: C&apos;s <code>while</code> is spelled <code>for</code> in Go.
+    Go에서 세미콜론 ; 을 사용하지 않은 for문은 C에서의 while 반복문을 의미합니다.
   </p>
   
 
@@ -662,7 +662,7 @@ func main() {
   
   
   <p>
-    If you omit the loop condition it loops forever, so an infinite loop is compactly expressed.
+    반복문의 조건문을 생략하면 영원히 반복합니다. 무한반복문을 간결하게 표현할 수 있습니다.
   </p>
   
 
