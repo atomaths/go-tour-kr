@@ -1,0 +1,3235 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>A Tour of Go</title>
+
+
+<script src="/static/jquery.js"></script>
+
+
+<link rel="stylesheet" href="/static/codemirror/lib/codemirror.css">
+<script src="/static/codemirror/lib/codemirror.js"></script>
+<script src="/static/codemirror/lib/go.js"></script>
+
+
+<link rel="stylesheet" href="static/tour.css">
+<script src="/static/lang.js"></script>
+<script src="/static/tour.js"></script>
+
+</head>
+<body>
+	<div id="wrap">
+		<div id="header">
+			<div id="slidenum">1</div>
+				<a href="#toc" id="tocbtn" title="Table of Contents"></a>
+				<h1>A Tour of Go</h1>
+			</div>
+
+<div id="slides" class="slides">
+
+
+<div class="slide">
+	
+  <h2>Hello, 안녕</h2>
+  
+  
+  <p>
+    <a href="http://golang.org" target="_blank">Go 프로그래밍 언어</a> 투어에 오신 것을 환영합니다.
+  </p>
+  
+
+  
+  <p>
+    이 투어는 3개의 섹션으로 되어 있고, 각 섹션의 마지막 부분에는 좀더 완벽한 이해를 돕기 위해 연습문제가 준비되어 있습니다.
+  </p>
+  
+
+  
+  <p>
+    지금 Run 버튼을 클릭해보거나 키보드에서 Shift-Enter 키를 눌러보세요. 옆의 Go 소스가 컴파일되고 실행될 겁니다. 실행 결과는 코드 밑에 표시됩니다.
+  </p>
+  
+
+  
+  <p>
+    이 투어에 있는 많은 예제 프로그램들은 Go가 다른 언어들과 어떤 차이점이 있는지 보여줄 것이고, 여러분이 Go를 배우는데 출발점이 될 것입니다.
+  </p>
+  
+
+  
+  <p>
+    소스를 수정하고 다시 한번 실행해보세요.
+  </p>
+  
+
+  
+  <p>
+    이제 다음으로 넘어갈 준비가 되었으면, Next 버튼을 클릭하거나 PageDown 키를 누르세요.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/hello.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+func main() {
+    fmt.Println(&#34;Hello, 안녕&#34;)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide nocode">
+	
+  <h2>Go local</h2>
+  
+  
+  <p>
+    이 투어는 다른 나라 언어로도 이용할 수 있습니다:
+  </p>
+  
+
+  <ul>
+  
+    <li><a href="http://go-tour-br.appspot.com/" target="_blank">Brazilian Portuguese — Português do Brasil</a></li>
+  
+    <li><a href="http://go-tour-he.appspot.com/" target="_blank">Hebrew — עִבְרִית</a></li>
+  
+    <li><a href="http://go-tour-zh.appspot.com/" target="_blank">Chinese — 普通话</a></li>
+  
+    <li><a href="http://go-tour-jp.appspot.com/" target="_blank">Japanese — 日本語</a></li>
+  
+  </ul>
+
+  
+  <p>
+    계속 하시려면 Next 버튼을 클릭하거나 PageDown 키를 누르세요.
+  </p>
+  
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Packages</h2>
+  
+  
+  <p>
+    Every Go program is made up of packages.
+  </p>
+  
+
+  
+  <p>
+    Programs start running in package <code>main</code>.
+  </p>
+  
+
+  
+  <p>
+    This program is using the packages with import paths <code>&quot;fmt&quot;</code> and <code>&quot;math&quot;</code>.
+  </p>
+  
+
+  
+  <p>
+    By convention, the package name is the same as the last element of the import path.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/packages.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;math&#34;
+)
+
+func main() {
+    fmt.Println(&#34;Happy&#34;, math.Pi, &#34;Day&#34;)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Imports</h2>
+  
+  
+  <p>
+    This code groups the imports into a parenthesized, &quot;factored&quot; import statement. You can also write multiple import statements, like:
+  </p>
+  
+
+  
+  <pre>import &#34;fmt&#34;
+import &#34;math&#34;</pre>
+  
+
+  <div class="source"><!--{{.play prog/imports.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;math&#34;
+)
+
+func main() {
+    fmt.Printf(&#34;Now you have %g problems.&#34;,
+        math.Nextafter(2, 3))
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Exported names</h2>
+  
+  
+  <p>
+    After importing a package, you can refer to the names it exports.
+  </p>
+  
+
+  
+  <p>
+    In Go, a name is exported if it begins with a capital letter.
+  </p>
+  
+
+  
+  <p>
+    <code>Foo</code> is an exported name, as is <code>FOO</code>. The name <code>foo</code> is not exported.
+  </p>
+  
+
+  
+  <p>
+    Run the code. Then rename <code>math.pi</code> to <code>math.Pi</code> and try it again.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/exported-names.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;math&#34;
+)
+
+func main() {
+    fmt.Println(math.pi)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Functions</h2>
+  
+  
+  <p>
+    A function can take zero or more arguments.
+  </p>
+  
+
+  
+  <p>
+    In this example, <code>add</code> takes two parameters of type <code>int</code>.
+  </p>
+  
+
+  
+  <p>
+    Notice that the type comes <i>after</i> the variable name.
+  </p>
+  
+
+  
+  <p>
+    (For more about why types look the way they do, see the <a href="http://golang.org/doc/articles/gos_declaration_syntax.html" target="_blank">article on Go&apos;s declaration syntax</a>.)
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/functions.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+func add(x int, y int) int {
+    return x + y
+}
+
+func main() {
+    fmt.Println(add(42, 13))
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Functions continued</h2>
+  
+  
+  <p>
+    When two or more consecutive named function parameters share a type, you can omit the type from all but the last.
+  </p>
+  
+
+  
+  <p>
+    In this example, we shortened
+  </p>
+  
+
+  
+  <pre>x int, y int</pre>
+  
+
+  
+  <p>
+    to
+  </p>
+  
+
+  
+  <pre>x, y int</pre>
+  
+
+  <div class="source"><!--{{.play prog/functions-continued.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+func add(x, y int) int {
+    return x + y
+}
+
+func main() {
+    fmt.Println(add(42, 13))
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Multiple results</h2>
+  
+  
+  <p>
+    A function can return any number of results.
+  </p>
+  
+
+  
+  <p>
+    This function returns two strings.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/multiple-results.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+func swap(x, y string) (string, string) {
+    return y, x
+}
+
+func main() {
+    a, b := swap(&#34;hello&#34;, &#34;world&#34;)
+    fmt.Println(a, b)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Named results</h2>
+  
+  
+  <p>
+    Functions take parameters. In Go, functions can return multiple &quot;result parameters&quot;, not just a single value. They can be named and act just like variables.
+  </p>
+  
+
+  
+  <p>
+    If the result parameters are named, a <code>return</code> statement without arguments returns the current values of the results.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/named-results.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+func split(sum int) (x, y int) {
+    x = sum * 4 / 9
+    y = sum - x
+    return
+}
+
+func main() {
+    fmt.Println(split(17))
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>변수 (Variables)</h2>
+  
+  
+  <p>
+    <code>var</code> 문장은 변수를 선언합니다. 함수의 매개변수 처럼 타입은 문장 끝에 명시합니다.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/variables.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+var x, y, z int
+var c, python, java bool
+
+func main() {
+    fmt.Println(x, y, z, c, python, java)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>변수의 초기화</h2>
+  
+  
+  <p>
+    변수 선언과 함께 변수 마다 초기화를 할 수 있습니다.
+  </p>
+  
+
+  
+  <p>
+    초기화를 하는 경우 타입(type)을 생략할 수 있습니다. 변수는 초기화 하고자 하는 값에 따라 타입이 결정됩니다.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/variables-with-initializers.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+var x, y, z int = 1, 2, 3
+var c, python, java = true, false, &#34;no!&#34;
+
+func main() {
+    fmt.Println(x, y, z, c, python, java)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>변수의 짧은 선언</h2>
+  
+  
+  <p>
+    함수 내에서 <code>:=</code> 할당을 `var`과 명시적인 타입(e.g. int, bool) 선언 대신 사용할 수 있습니다.
+  </p>
+  
+
+  
+  <p>
+    (함수 밖의 모든 문장의 구조는 키워드로 시작하고, <code>:=</code> 선언은 사용할 수 없습니다.)
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/short-variable-declarations.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+func main() {
+    var x, y, z int = 1, 2, 3
+    c, python, java := true, false, &#34;no!&#34;
+
+    fmt.Println(x, y, z, c, python, java)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Constants (상수)</h2>
+  
+  
+  <p>
+    상수는 <code>const</code> 키워드와 함께 변수처럼 선언합니다.
+  </p>
+  
+
+  
+  <p>
+    상수는 문자(character), 문자열(string), 부울(boolean), 숫자(numeric values)일 수 있습니다.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/constants.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+const Pi = 3.14
+
+func main() {
+    const World = &#34;안녕&#34;
+    fmt.Println(&#34;Hello&#34;, World)
+    fmt.Println(&#34;Happy&#34;, Pi, &#34;Day&#34;)
+
+    const Truth = true
+    fmt.Println(&#34;Go rules?&#34;, Truth)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Numeric Constants (숫자 상수)</h2>
+  
+  
+  <p>
+    숫자 상수는 매우 정밀도가 높은 <i>값(values)</i> 입니다.
+  </p>
+  
+
+  
+  <p>
+    타입을 지정하지 않은 상수는 문맥(context)에 맞게 필요로 하는 타입을 가지게 됩니다.
+  </p>
+  
+
+  
+  <p>
+    `needInt(Big)`을 출력하는 것도 한번 해보세요.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/numeric-constants.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+const (
+    Big   = 1 &lt;&lt; 100
+    Small = Big &gt;&gt; 99
+)
+
+func needInt(x int) int { return x*10 + 1 }
+func needFloat(x float64) float64 {
+    return x * 0.1
+}
+
+func main() {
+    fmt.Println(needInt(Small))
+    fmt.Println(needFloat(Small))
+    fmt.Println(needFloat(Big))
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>For</h2>
+  
+  
+  <p>
+    Go 언어는 반복문이 &apos;for&apos;밖에 없습니다.
+  </p>
+  
+
+  
+  <p>
+    기본적인 &apos;for&apos; 반복문은 C와 Java 언어와 거의 유사합니다. 다른점은 소괄호 ( )를 사용하지 않습니다. 하지만 중괄호 { } 는 필요합니다.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/for.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+func main() {
+    sum := 0
+    for i := 0; i &lt; 10; i++ {
+        sum += i
+    }
+    fmt.Println(sum)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>For continued</h2>
+  
+  
+  <p>
+    C와 Java 언어 처럼, 조건문을 제외한 앞 뒤의 문장은 비워도 됩니다.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/for-continued.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+func main() {
+    sum := 1
+    for sum &lt; 1000 {
+        sum += sum
+    }
+    fmt.Println(sum)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>For is Go&#39;s &#34;while&#34;</h2>
+  
+  
+  <p>
+    Go에서 세미콜론 ; 을 사용하지 않은 for문은 C에서의 while 반복문을 의미합니다.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/for-is-gos-while.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+func main() {
+    sum := 1
+    for sum &lt; 1000 {
+        sum += sum
+    }
+    fmt.Println(sum)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Forever</h2>
+  
+  
+  <p>
+    반복문의 조건문을 생략하면 영원히 반복합니다. 무한반복문을 간결하게 표현할 수 있습니다.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/forever.go}}
+--><pre style="display: none"></pre><pre>package main
+
+func main() {
+    for {
+    }
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>If</h2>
+  
+  
+  <p>
+    <code>if</code> 조건문은 C, Java 언어와 비슷합니다. 하지만 소괄호 `(`)`는 사용하지 않습니다. 하지만 `{`}`는 필요합니다.
+  </p>
+  
+
+  
+  <p>
+    어디서 들어본 것 같지 않나요?
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/if.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;math&#34;
+)
+
+func sqrt(x float64) string {
+    if x &lt; 0 {
+        return sqrt(-x) + &#34;i&#34;
+    }
+    return fmt.Sprint(math.Sqrt(x))
+}
+
+func main() {
+    fmt.Println(sqrt(2), sqrt(-4))
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>If와 간단한 명령문의 사용</h2>
+  
+  
+  <p>
+    `for`와 같이 `if`조건문은 조건에 따른 결과를 실행하기 전에 예제의 `v := math.Pow(x,n)`과 같은 짧은 명령문을 사용할 수 있습니다.
+  </p>
+  
+
+  
+  <p>
+    `if`문에서 선언된 변수는 `if`문안에서만 사용 할 수 있습니다.
+  </p>
+  
+
+  
+  <p>
+    (마지막 <code>return</code> 문장의 `lim`을  `v`로 바꿔 보세요.)
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/if-with-a-short-statement.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;math&#34;
+)
+
+func pow(x, n, lim float64) float64 {
+    if v := math.Pow(x, n); v &lt; lim {
+        return v
+    }
+    return lim
+}
+
+func main() {
+    fmt.Println(
+        pow(3, 2, 10),
+        pow(3, 3, 20),
+    )
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>If and else</h2>
+  
+  
+  <p>
+    `if`의 간단한 명령문에서 선언된 변수는 `else`의 블럭 안에서도 사용할 수 있습니다.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/if-and-else.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;math&#34;
+)
+
+func pow(x, n, lim float64) float64 {
+    if v := math.Pow(x, n); v &lt; lim {
+        return v
+    } else {
+        fmt.Printf(&#34;%g &gt;= %g\n&#34;, v, lim)
+    }
+    // can&#39;t use v here, though
+    return lim
+}
+
+func main() {
+    fmt.Println(
+        pow(3, 2, 10),
+        pow(3, 3, 20),
+    )
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>기본 자료형</h2>
+  
+  
+  <p>
+    Go 언어의 기본 자료형은 다음과 같습니다
+  </p>
+  
+
+  
+  <pre>bool
+
+string
+
+int  int8  int16  int32  int64
+uint uint8 uint16 uint32 uint64 uintptr
+
+byte // uint8의 다른 이름(alias)
+
+rune // int32의 다른 이름(alias)
+     // 유니코드 코드 포인트 값을 표현합니다. 
+
+float32 float64
+
+complex64 complex128</pre>
+  
+
+  <div class="source"><!--{{.play prog/basic-types.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;math/cmplx&#34;
+)
+
+var (
+    ToBe   bool       = false
+    MaxInt uint64     = 1&lt;&lt;64 - 1
+    z      complex128 = cmplx.Sqrt(-5 + 12i)
+)
+
+func main() {
+    const f = &#34;%T(%v)\n&#34;
+    fmt.Printf(f, ToBe, ToBe)
+    fmt.Printf(f, MaxInt, MaxInt)
+    fmt.Printf(f, z, z)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>구조체</h2>
+  
+  
+  <p>
+    `구조체`는 데이터들의 묶음입니다.
+  </p>
+  
+
+  
+  <p>
+    (구조체 안의 데이터들의  `자료형`은 원하는대로 하면 됩니다.)
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/structs.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+type Vertex struct {
+    X int
+    Y int
+}
+
+func main() {
+    fmt.Println(Vertex{1, 2})
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>구조체의 데이터</h2>
+  
+  
+  <p>
+    구조체가 포함한 데이터들은 `.`을 이용하여 사용할 수 있습니다.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/struct-fields.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+type Vertex struct {
+    X int
+    Y int
+}
+
+func main() {
+    v := Vertex{1, 2}
+    v.X = 4
+    fmt.Println(v.X)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Pointers</h2>
+  
+  
+  <p>
+    Go has pointers, but no pointer arithmetic.
+  </p>
+  
+
+  
+  <p>
+    Struct fields can be accessed through a struct pointer. The indirection through the pointer is transparent.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/pointers.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+type Vertex struct {
+    X int
+    Y int
+}
+
+func main() {
+    p := Vertex{1, 2}
+    q := &amp;p
+    q.X = 1e9
+    fmt.Println(p)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Struct Literals</h2>
+  
+  
+  <p>
+    A struct literal denotes a newly allocated struct value by listing the values of its fields.
+  </p>
+  
+
+  
+  <p>
+    You can list just a subset of fields by using the <code>Name:</code> syntax. (And the order of named fields is irrelevant.)
+  </p>
+  
+
+  
+  <p>
+    The special prefix <code>&amp;</code> constructs a pointer to a struct literal.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/struct-literals.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+type Vertex struct {
+    X, Y int
+}
+
+var (
+    p = Vertex{1, 2}  // has type Vertex
+    q = &amp;Vertex{1, 2} // has type *Vertex
+    r = Vertex{X: 1}  // Y:0 is implicit
+    s = Vertex{}      // X:0 and Y:0
+)
+
+func main() {
+    fmt.Println(p, q, r, s)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>The new function</h2>
+  
+  
+  <p>
+    The expression <code>new(T)</code> allocates a zeroed <code>T</code> value and returns a pointer to it.
+  </p>
+  
+
+  
+  <pre>var t *T = new(T)</pre>
+  
+
+  
+  <p>
+    or
+  </p>
+  
+
+  
+  <pre>t := new(T)</pre>
+  
+
+  <div class="source"><!--{{.play prog/the-new-function.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+type Vertex struct {
+    X, Y int
+}
+
+func main() {
+    v := new(Vertex)
+    fmt.Println(v)
+    v.X, v.Y = 11, 9
+    fmt.Println(v)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Maps</h2>
+  
+  
+  <p>
+    A map maps keys to values.
+  </p>
+  
+
+  
+  <p>
+    Maps must be created with <code>make</code> (not <code>new</code>) before use; the <code>nil</code> map is empty and cannot be assigned to.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/maps.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+type Vertex struct {
+    Lat, Long float64
+}
+
+var m map[string]Vertex
+
+func main() {
+    m = make(map[string]Vertex)
+    m[&#34;Bell Labs&#34;] = Vertex{
+        40.68433, -74.39967,
+    }
+    fmt.Println(m[&#34;Bell Labs&#34;])
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Map literals</h2>
+  
+  
+  <p>
+    Map literals are like struct literals, but the keys are required.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/map-literals.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+type Vertex struct {
+    Lat, Long float64
+}
+
+var m = map[string]Vertex{
+    &#34;Bell Labs&#34;: Vertex{
+        40.68433, -74.39967,
+    },
+    &#34;Google&#34;: Vertex{
+        37.42202, -122.08408,
+    },
+}
+
+func main() {
+    fmt.Println(m)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Map literals continued</h2>
+  
+  
+  <p>
+    If the top-level type is just a type name, you can omit it from the elements of the literal.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/map-literals-continued.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+type Vertex struct {
+    Lat, Long float64
+}
+
+var m = map[string]Vertex{
+    &#34;Bell Labs&#34;: {40.68433, -74.39967},
+    &#34;Google&#34;:    {37.42202, -122.08408},
+}
+
+func main() {
+    fmt.Println(m)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Mutating Maps</h2>
+  
+  
+  <p>
+    Insert or update an element in map <code>m</code>:
+  </p>
+  
+
+  
+  <pre>m[key] = elem</pre>
+  
+
+  
+  <p>
+    Retrieve an element:
+  </p>
+  
+
+  
+  <pre>elem = m[key]</pre>
+  
+
+  
+  <p>
+    Delete an element:
+  </p>
+  
+
+  
+  <pre>delete(m, key)</pre>
+  
+
+  
+  <p>
+    Test that a key is present with a two-value assignment:
+  </p>
+  
+
+  
+  <pre>elem, ok = m[key]</pre>
+  
+
+  
+  <p>
+    If <code>key</code> is in <code>m</code>, <code>ok</code> is <code>true</code>. If not, <code>ok</code> is <code>false</code> and <code>elem</code> is the zero value for the map&apos;s element type.
+  </p>
+  
+
+  
+  <p>
+    Similarly, when reading from a map if the key is not present the result is the zero value for the map&apos;s element type.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/mutating-maps.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+func main() {
+    m := make(map[string]int)
+
+    m[&#34;Answer&#34;] = 42
+    fmt.Println(&#34;The value:&#34;, m[&#34;Answer&#34;])
+
+    m[&#34;Answer&#34;] = 48
+    fmt.Println(&#34;The value:&#34;, m[&#34;Answer&#34;])
+
+    delete(m, &#34;Answer&#34;)
+    fmt.Println(&#34;The value:&#34;, m[&#34;Answer&#34;])
+
+    v, ok := m[&#34;Answer&#34;]
+    fmt.Println(&#34;The value:&#34;, v, &#34;Present?&#34;, ok)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Slices</h2>
+  
+  
+  <p>
+    A slice points to an array of values and also includes a length.
+  </p>
+  
+
+  
+  <p>
+    <code>[]T</code> is a slice with elements of type <code>T</code>.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/slices.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+func main() {
+    p := []int{2, 3, 5, 7, 11, 13}
+    fmt.Println(&#34;p ==&#34;, p)
+
+    for i := 0; i &lt; len(p); i++ {
+        fmt.Printf(&#34;p[%d] == %d\n&#34;,
+            i, p[i])
+    }
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Slicing slices</h2>
+  
+  
+  <p>
+    Slices can be re-sliced, creating a new slice value that points to the same array.
+  </p>
+  
+
+  
+  <p>
+    The expression
+  </p>
+  
+
+  
+  <pre>s[lo:hi]</pre>
+  
+
+  
+  <p>
+    evaluates to a slice of the elements from <code>lo</code> through <code>hi-1</code>, inclusive. Thus
+  </p>
+  
+
+  
+  <pre>s[lo:lo]</pre>
+  
+
+  
+  <p>
+    is empty and
+  </p>
+  
+
+  
+  <pre>s[lo:lo&#43;1]</pre>
+  
+
+  
+  <p>
+    has one element.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/slicing-slices.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+func main() {
+    p := []int{2, 3, 5, 7, 11, 13}
+    fmt.Println(&#34;p ==&#34;, p)
+    fmt.Println(&#34;p[1:4] ==&#34;, p[1:4])
+
+    // missing low index implies 0
+    fmt.Println(&#34;p[:3] ==&#34;, p[:3])
+
+    // missing high index implies len(s)
+    fmt.Println(&#34;p[4:] ==&#34;, p[4:])
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Making slices</h2>
+  
+  
+  <p>
+    Slices are created with the <code>make</code> function. It works by allocating a zeroed array and returning a slice that refers to that array:
+  </p>
+  
+
+  
+  <pre>a := make([]int, 5)  // len(a)=5</pre>
+  
+
+  
+  <p>
+    To specify a capacity, pass a third argument to <code>make</code>:
+  </p>
+  
+
+  
+  <pre>b := make([]int, 0, 5) // len(b)=0, cap(b)=5
+
+b = b[:cap(b)] // len(b)=5, cap(b)=5
+b = b[1:]      // len(b)=4, cap(b)=4</pre>
+  
+
+  <div class="source"><!--{{.play prog/making-slices.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+func main() {
+    a := make([]int, 5)
+    printSlice(&#34;a&#34;, a)
+    b := make([]int, 0, 5)
+    printSlice(&#34;b&#34;, b)
+    c := b[:2]
+    printSlice(&#34;c&#34;, c)
+    d := c[2:5]
+    printSlice(&#34;d&#34;, d)
+}
+
+func printSlice(s string, x []int) {
+    fmt.Printf(&#34;%s len=%d cap=%d %v\n&#34;,
+        s, len(x), cap(x), x)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Nil slices</h2>
+  
+  
+  <p>
+    The zero value of a slice is <code>nil</code>.
+  </p>
+  
+
+  
+  <p>
+    A nil slice has a length and capacity of 0.
+  </p>
+  
+
+  
+  <p>
+    (To learn more about slices, read the <a href="http://golang.org/doc/articles/slices_usage_and_internals.html" target="_blank">Slices: usage and internals</a> article.)
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/nil-slices.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+func main() {
+    var z []int
+    fmt.Println(z, len(z), cap(z))
+    if z == nil {
+        fmt.Println(&#34;nil!&#34;)
+    }
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Function values</h2>
+  
+  
+  <p>
+    Functions are values too.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/function-values.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;math&#34;
+)
+
+func main() {
+    hypot := func(x, y float64) float64 {
+        return math.Sqrt(x*x + y*y)
+    }
+
+    fmt.Println(hypot(3, 4))
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Function closures</h2>
+  
+  
+  <p>
+    And functions are full closures.
+  </p>
+  
+
+  
+  <p>
+    The <code>adder</code> function returns a closure. Each closure is bound to its own <code>sum</code> variable.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/function-closures.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+func adder() func(int) int {
+    sum := 0
+    return func(x int) int {
+        sum += x
+        return sum
+    }
+}
+
+func main() {
+    pos, neg := adder(), adder()
+    for i := 0; i &lt; 10; i++ {
+        fmt.Println(
+            pos(i),
+            neg(-2*i),
+        )
+    }
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Range</h2>
+  
+  
+  <p>
+    The <code>range</code> form of the <code>for</code> loop iterates over a slice or map.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/range.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+var pow = []int{1, 2, 4, 8, 16, 32, 64, 128}
+
+func main() {
+    for i, v := range pow {
+        fmt.Printf(&#34;2**%d = %d\n&#34;, i, v)
+    }
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Range continued</h2>
+  
+  
+  <p>
+    You can skip the index or value by assigning to <code>_</code>.
+  </p>
+  
+
+  
+  <p>
+    If you only want the index, drop the “`,`value`” entirely.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/range-continued.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+func main() {
+    pow := make([]int, 10)
+    for i := range pow {
+        pow[i] = 1 &lt;&lt; uint(i)
+    }
+    for _, value := range pow {
+        fmt.Printf(&#34;%d\n&#34;, value)
+    }
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Switch</h2>
+  
+  
+  <p>
+    You probably knew what <code>switch</code> was going to look like.
+  </p>
+  
+
+  
+  <p>
+    A case body breaks automatically, unless it ends with a <code>fallthrough</code> statement.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/switch.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;runtime&#34;
+)
+
+func main() {
+    fmt.Print(&#34;Go runs on &#34;)
+    switch os := runtime.GOOS; os {
+    case &#34;darwin&#34;:
+        fmt.Println(&#34;OS X.&#34;)
+    case &#34;linux&#34;:
+        fmt.Println(&#34;Linux.&#34;)
+    default:
+        // freebsd, openbsd,
+        // plan9, windows...
+        fmt.Printf(&#34;%s.&#34;, os)
+    }
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Switch evaluation order</h2>
+  
+  
+  <p>
+    Switch cases evaluate cases from top to bottom, stopping when a case succeeds.
+  </p>
+  
+
+  
+  <p>
+    (For example,
+  </p>
+  
+
+  
+  <pre>switch i {
+case 0:
+case f():
+}</pre>
+  
+
+  
+  <p>
+    does not call <code>f</code> if <code>i==0</code>.)
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/switch-evaluation-order.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;time&#34;
+)
+
+func main() {
+    fmt.Println(&#34;When&#39;s Saturday?&#34;)
+    today := time.Now().Weekday()
+    switch time.Saturday {
+    case today + 0:
+        fmt.Println(&#34;Today.&#34;)
+    case today + 1:
+        fmt.Println(&#34;Tomorrow.&#34;)
+    case today + 2:
+        fmt.Println(&#34;In two days.&#34;)
+    default:
+        fmt.Println(&#34;Too far away.&#34;)
+    }
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Switch with no condition</h2>
+  
+  
+  <p>
+    Switch without a condition is the same as <code>switch true</code>.
+  </p>
+  
+
+  
+  <p>
+    This construct can be a clean way to write long if-then-else chains.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/switch-with-no-condition.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;time&#34;
+)
+
+func main() {
+    t := time.Now()
+    switch {
+    case t.Hour() &lt; 12:
+        fmt.Println(&#34;Good morning!&#34;)
+    case t.Hour() &lt; 17:
+        fmt.Println(&#34;Good afternoon.&#34;)
+    default:
+        fmt.Println(&#34;Good evening.&#34;)
+    }
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Exercise: Loops and Functions</h2>
+  
+  
+  <p>
+    As a simple way to play with functions and loops, implement the square root function using Newton&apos;s method.
+  </p>
+  
+
+  
+  <p>
+    In this case, Newton&apos;s method is to approximate <code>Sqrt(x)</code> by picking a starting point <i>z</i> and then repeating:
+  </p>
+  
+
+  
+  <p>
+    To begin with, just repeat that calculation 10 times and see how close you get to the answer for various values (1, 2, 3, ...).
+  </p>
+  
+
+  
+  <p>
+    Next, change the loop condition to stop once the value has stopped changing (or only changes by a very small delta). See if that&apos;s more or fewer iterations. How close are you to the <a href="http://golang.org/pkg/math/#Sqrt" target="_blank">math.Sqrt</a>?
+  </p>
+  
+
+  
+  <p>
+    Hint: to declare and initialize a floating point value, give it floating point syntax or use a conversion:
+  </p>
+  
+
+  
+  <pre>z := float64(1)
+z := 1.0</pre>
+  
+
+  <div class="source"><!--{{.play prog/exercise-loops-and-functions.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+)
+
+func Sqrt(x float64) float64 {
+}
+
+func main() {
+    fmt.Println(Sqrt(2))
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Exercise: Maps</h2>
+  
+  
+  <p>
+    Implement <code>WordCount</code>.  It should return a map of the counts of each “word” in the string <code>s</code>. The <code>wc.Test</code> function runs a test suite against the provided function and prints success or failure.
+  </p>
+  
+
+  
+  <p>
+    You might find <a href="http://golang.org/pkg/strings/#Fields" target="_blank">strings.Fields</a> helpful.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/exercise-maps.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;code.google.com/p/go-tour/wc&#34;
+)
+
+func WordCount(s string) map[string]int {
+    return map[string]int{&#34;x&#34;: 1}
+}
+
+func main() {
+    wc.Test(WordCount)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Exercise: Slices</h2>
+  
+  
+  <p>
+    Implement <code>Pic</code>. It should return a slice of length <code>dy</code>, each element of which is a slice of <code>dx</code> 8-bit unsigned integers. When you run the program, it will display your picture, interpreting the integers as grayscale (well, bluescale) values.
+  </p>
+  
+
+  
+  <p>
+    The choice of image is up to you. Interesting functions include <code>x^y</code>, <code>(x+y)/2</code>, and <code>x*y</code>.
+  </p>
+  
+
+  
+  <p>
+    (You need to use a loop to allocate each <code>[]uint8</code> inside the <code>[][]uint8</code>.)
+  </p>
+  
+
+  
+  <p>
+    (Use <code>uint8(intValue)</code> to convert between types.)
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/exercise-slices.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;code.google.com/p/go-tour/pic&#34;
+
+func Pic(dx, dy int) [][]uint8 {
+}
+
+func main() {
+    pic.Show(Pic)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Exercise: Fibonacci closure</h2>
+  
+  
+  <p>
+    Let&apos;s have some fun with functions.
+  </p>
+  
+
+  
+  <p>
+    Implement a <code>fibonacci</code> function that returns a function (a closure) that returns successive fibonacci numbers.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/exercise-fibonacci-closure.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+// fibonacci is a function that returns
+// a function that returns an int.
+func fibonacci() func() int {
+}
+
+func main() {
+    f := fibonacci()
+    for i := 0; i &lt; 10; i++ {
+        fmt.Println(f())
+    }
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Advanced Exercise: Complex cube roots</h2>
+  
+  
+  <p>
+    Let&apos;s explore Go&apos;s built-in support for complex numbers via the <code>complex64</code> and <code>complex128</code> types. For cube roots, Newton&apos;s method amounts to repeating:
+  </p>
+  
+
+  
+  <p>
+    Find the cube root of 2, just to make sure the algorithm works. There is a <a href="http://golang.org/pkg/math/cmplx/#Pow" target="_blank">Pow</a> function in the <code>math/cmplx</code> package.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/advanced-exercise-complex-cube-roots.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+func Cbrt(x complex128) complex128 {
+}
+
+func main() {
+    fmt.Println(Cbrt(2))
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide nocode">
+	
+  <h2>Methods and Interfaces</h2>
+  
+
+</div>
+
+<div class="slide">
+	
+  <h2>Methods</h2>
+  
+  
+  <p>
+    Go does not have classes. However, you can define methods on struct types.
+  </p>
+  
+
+  
+  <p>
+    The <i>method receiver</i> appears in its own argument list between the <code>func</code> keyword and the method name.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/methods.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;math&#34;
+)
+
+type Vertex struct {
+    X, Y float64
+}
+
+func (v *Vertex) Abs() float64 {
+    return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+
+func main() {
+    v := &amp;Vertex{3, 4}
+    fmt.Println(v.Abs())
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Methods continued</h2>
+  
+  
+  <p>
+    In fact, you can define a method on <i>any</i> type you define in your package, not just structs.
+  </p>
+  
+
+  
+  <p>
+    You cannot define a method on a type from another package, or on a basic type.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/methods-continued.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;math&#34;
+)
+
+type MyFloat float64
+
+func (f MyFloat) Abs() float64 {
+    if f &lt; 0 {
+        return float64(-f)
+    }
+    return float64(f)
+}
+
+func main() {
+    f := MyFloat(-math.Sqrt2)
+    fmt.Println(f.Abs())
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Methods with pointer receivers</h2>
+  
+  
+  <p>
+    Methods can be associated with a named type or a pointer to a named type.
+  </p>
+  
+
+  
+  <p>
+    We just saw two <code>Abs</code> methods. One on the <code>*Vertex</code> pointer type and the other on the <code>MyFloat</code> value type.
+  </p>
+  
+
+  
+  <p>
+    There are two reasons to use a pointer receiver. First, to avoid copying the value on each method call (more efficient if the value type is a large struct). Second, so that the method can modify the value that its receiver points to.
+  </p>
+  
+
+  
+  <p>
+    Try changing the declarations of the <code>Abs</code> and <code>Scale</code> methods to use <code>Vertex</code> as the receiver, instead of <code>*Vertex</code>.
+  </p>
+  
+
+  
+  <p>
+    The <code>Scale</code> method has no effect when <code>v</code> is a <code>Vertex</code>. <code>Scale</code> mutates <code>v</code>. When <code>v</code> is a value (non-pointer) type, the method sees a copy of the <code>Vertex</code> and cannot mutate the original value.
+  </p>
+  
+
+  
+  <p>
+    <code>Abs</code> works either way. It only reads <code>v</code>. It doesn&apos;t matter whether it is reading the original value (through a pointer) or a copy of that value.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/methods-with-pointer-receivers.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;math&#34;
+)
+
+type Vertex struct {
+    X, Y float64
+}
+
+func (v *Vertex) Scale(f float64) {
+    v.X = v.X * f
+    v.Y = v.Y * f
+}
+
+func (v *Vertex) Abs() float64 {
+    return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+
+func main() {
+    v := &amp;Vertex{3, 4}
+    v.Scale(5)
+    fmt.Println(v, v.Abs())
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Interfaces</h2>
+  
+  
+  <p>
+    An interface type is defined by a set of methods.
+  </p>
+  
+
+  
+  <p>
+    A value of interface type can hold any value that implements those methods.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/interfaces.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;math&#34;
+)
+
+type Abser interface {
+    Abs() float64
+}
+
+func main() {
+    var a Abser
+    f := MyFloat(-math.Sqrt2)
+    v := Vertex{3, 4}
+
+    a = f  // a MyFloat implements Abser
+    a = &amp;v // a *Vertex implements Abser
+    a = v  // a Vertex, does NOT
+    // implement Abser
+
+    fmt.Println(a.Abs())
+}
+
+type MyFloat float64
+
+func (f MyFloat) Abs() float64 {
+    if f &lt; 0 {
+        return float64(-f)
+    }
+    return float64(f)
+}
+
+type Vertex struct {
+    X, Y float64
+}
+
+func (v *Vertex) Abs() float64 {
+    return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Interfaces are satisfied implicitly</h2>
+  
+  
+  <p>
+    A type implements an interface by implementing the methods.
+  </p>
+  
+
+  
+  <p>
+    <i>There is no explicit declaration of intent.</i>
+  </p>
+  
+
+  
+  <p>
+    Implicit interfaces decouple implementation packages from the packages that define the interfaces: neither depends on the other.
+  </p>
+  
+
+  
+  <p>
+    It also encourages the definition of precise interfaces, because you don&apos;t have to find every implementation and tag it with the new interface name.
+  </p>
+  
+
+  
+  <p>
+    <a href="http://golang.org/pkg/io/" target="_blank">Package io</a> defines <code>Reader</code> and <code>Writer</code>; you don&apos;t have to.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/interfaces-are-satisfied-implicitly.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;os&#34;
+)
+
+type Reader interface {
+    Read(b []byte) (n int, err error)
+}
+
+type Writer interface {
+    Write(b []byte) (n int, err error)
+}
+
+type ReadWriter interface {
+    Reader
+    Writer
+}
+
+func main() {
+    var w Writer
+
+    // os.Stdout implements Writer
+    w = os.Stdout
+
+    fmt.Fprintf(w, &#34;hello, writer\n&#34;)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Errors</h2>
+  
+  
+  <p>
+    An error is anything that can describe itself as an error string. The idea is captured by the predefined, built-in interface type, <code>error</code>, with its single method, <code>Error</code>, returning a string:
+  </p>
+  
+
+  
+  <pre>type error interface {
+	Error() string
+}</pre>
+  
+
+  
+  <p>
+    The <code>fmt</code> package&apos;s various print routines automatically know to call the method when asked to print an <code>error</code>.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/errors.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;time&#34;
+)
+
+type MyError struct {
+    When time.Time
+    What string
+}
+
+func (e *MyError) Error() string {
+    return fmt.Sprintf(&#34;at %v, %s&#34;,
+        e.When, e.What)
+}
+
+func run() error {
+    return &amp;MyError{
+        time.Now(),
+        &#34;it didn&#39;t work&#34;,
+    }
+}
+
+func main() {
+    if err := run(); err != nil {
+        fmt.Println(err)
+    }
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Web servers</h2>
+  
+  
+  <p>
+    <a href="http://golang.org/pkg/net/http/" target="_blank">Package http</a> serves HTTP requests using any value that implements <code>http.Handler</code>:
+  </p>
+  
+
+  
+  <pre>package http
+
+type Handler interface {
+	ServeHTTP(w ResponseWriter, r *Request)
+}</pre>
+  
+
+  
+  <p>
+    In this example, the type <code>Hello</code> implements <code>http.Handler</code>.
+  </p>
+  
+
+  
+  <p>
+    Visit <a href="http://localhost:4000/" target="_blank">http://localhost:4000/</a> to see the greeting.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/web-servers.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;net/http&#34;
+)
+
+type Hello struct{}
+
+func (h Hello) ServeHTTP(
+    w http.ResponseWriter,
+    r *http.Request) {
+    fmt.Fprint(w, &#34;Hello!&#34;)
+}
+
+func main() {
+    var h Hello
+    http.ListenAndServe(&#34;localhost:4000&#34;, h)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Images</h2>
+  
+  
+  <p>
+    <a href="http://golang.org/pkg/image/#Image" target="_blank">Package image</a> defines the <code>Image</code> interface:
+  </p>
+  
+
+  
+  <pre>package image
+
+type Image interface {
+	ColorModel() color.Model
+	Bounds() Rectangle
+	At(x, y int) color.Color
+}</pre>
+  
+
+  
+  <p>
+    (See <a href="http://golang.org/pkg/image/#Image" target="_blank">the documentation</a> for all the details.)
+  </p>
+  
+
+  
+  <p>
+    Also, <code>color.Color</code> and <code>color.Model</code> are interfaces, but we&apos;ll ignore that by using the predefined implementations <code>color.RGBA</code> and <code>color.RGBAModel</code>.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/images.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;image&#34;
+)
+
+func main() {
+    m := image.NewRGBA(image.Rect(0, 0, 100, 100))
+    fmt.Println(m.Bounds())
+    fmt.Println(m.At(0, 0).RGBA())
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Exercise: Errors</h2>
+  
+  
+  <p>
+    Copy your <code>Sqrt</code> function from the earlier exercises and modify it to return an <code>error</code> value.
+  </p>
+  
+
+  
+  <p>
+    <code>Sqrt</code> should return a non-nil error value when given a negative number, as it doesn&apos;t support complex numbers.
+  </p>
+  
+
+  
+  <p>
+    Create a new type
+  </p>
+  
+
+  
+  <pre>type ErrNegativeSqrt float64</pre>
+  
+
+  
+  <p>
+    and make it an <code>error</code> by giving it a
+  </p>
+  
+
+  
+  <pre>func (e ErrNegativeSqrt) Error() string</pre>
+  
+
+  
+  <p>
+    method such that <code>ErrNegativeSqrt(-2).Error()</code> returns <code>&quot;cannot Sqrt negative number: -2&quot;</code>.
+  </p>
+  
+
+  
+  <p>
+    <b>Note:</b> a call to <code>fmt.Print(e)</code> inside the <code>Error</code> method will send the program into an infinite loop. You can avoid this by converting <code>e</code> first: <code>fmt.Print(float64(e))</code>. Why?
+  </p>
+  
+
+  
+  <p>
+    Change your <code>Sqrt</code> function to return an <code>ErrNegativeSqrt</code> value when given a negative number.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/exercise-errors.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+)
+
+func Sqrt(f float64) (float64, error) {
+    return 0, nil
+}
+
+func main() {
+    fmt.Println(Sqrt(2))
+    fmt.Println(Sqrt(-2))
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Exercise: HTTP Handlers</h2>
+  
+  
+  <p>
+    Implement the following types and define ServeHTTP methods on them. Register them to handle specific paths in your web server.
+  </p>
+  
+
+  
+  <pre>type String string
+
+type Struct struct {
+	Greeting string
+	Punct    string
+	Who      string
+}</pre>
+  
+
+  
+  <p>
+    For example, you should be able to register handlers using:
+  </p>
+  
+
+  
+  <pre>http.Handle(&#34;/string&#34;, String(&#34;I&#39;m a frayed knot.&#34;))
+http.Handle(&#34;/struct&#34;, &amp;Struct{&#34;Hello&#34;, &#34;:&#34;, &#34;Gophers!&#34;})</pre>
+  
+
+  <div class="source"><!--{{.play prog/exercise-http-handlers.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;net/http&#34;
+)
+
+func main() {
+    // your http.Handle calls here
+    http.ListenAndServe(&#34;localhost:4000&#34;, nil)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Exercise: Images</h2>
+  
+  
+  <p>
+    Remember the picture generator you wrote earlier? Let&apos;s write another one, but this time it will return an implementation of <code>image.Image</code> instead of a slice of data.
+  </p>
+  
+
+  
+  <p>
+    Define your own <code>Image</code> type, implement <a href="http://golang.org/pkg/image/#Image" target="_blank">the necessary methods</a>, and call <code>pic.ShowImage</code>.
+  </p>
+  
+
+  
+  <p>
+    <code>Bounds</code> should return a <code>image.Rectangle</code>, like <code>image.Rect(0, 0, w, h)</code>.
+  </p>
+  
+
+  
+  <p>
+    <code>ColorModel</code> should return <code>color.RGBAModel</code>.
+  </p>
+  
+
+  
+  <p>
+    <code>At</code> should return a color; the value <code>v</code> in the last picture generator corresponds to <code>color.RGBA{v, v, 255, 255}</code> in this one.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/exercise-images.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;code.google.com/p/go-tour/pic&#34;
+    &#34;image&#34;
+)
+
+type Image struct{}
+
+func main() {
+    m := Image{}
+    pic.ShowImage(m)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Exercise: Rot13 Reader</h2>
+  
+  
+  <p>
+    A common pattern is an <a href="http://golang.org/pkg/io/#Reader" target="_blank">io.Reader</a> that wraps another <code>io.Reader</code>, modifying the stream in some way.
+  </p>
+  
+
+  
+  <p>
+    For example, the <a href="http://golang.org/pkg/compress/gzip/#NewReader" target="_blank">gzip.NewReader</a> function takes an <code>io.Reader</code> (a stream of gzipped data) and returns a <code>*gzip.Reader</code> that also implements <code>io.Reader</code> (a stream of the decompressed data).
+  </p>
+  
+
+  
+  <p>
+    Implement a <code>rot13Reader</code> that implements <code>io.Reader</code> and reads from an <code>io.Reader</code>, modifying the stream by applying the <a href="http://en.wikipedia.org/wiki/ROT13" target="_blank">ROT13</a> substitution cipher to all alphabetical characters.
+  </p>
+  
+
+  
+  <p>
+    The <code>rot13Reader</code> type is provided for you.  Make it an <code>io.Reader</code> by implementing its <code>Read</code> method.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/exercise-rot-reader.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;io&#34;
+    &#34;os&#34;
+    &#34;strings&#34;
+)
+
+type rot13Reader struct {
+    r io.Reader
+}
+
+func main() {
+    s := strings.NewReader(
+        &#34;Lbh penpxrq gur pbqr!&#34;)
+    r := rot13Reader{s}
+    io.Copy(os.Stdout, &amp;r)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide nocode">
+	
+  <h2>Concurrency</h2>
+  
+
+</div>
+
+<div class="slide">
+	
+  <h2>Goroutines</h2>
+  
+  
+  <p>
+    A <i>goroutine</i> is a lightweight thread managed by the Go runtime.
+  </p>
+  
+
+  
+  <pre>go f(x, y, z)</pre>
+  
+
+  
+  <p>
+    starts a new goroutine running
+  </p>
+  
+
+  
+  <pre>f(x, y, z)</pre>
+  
+
+  
+  <p>
+    The evaluation of <code>f</code>, <code>x</code>, <code>y</code>, and <code>z</code> happens in the current goroutine and the execution of <code>f</code> happens in the new goroutine.
+  </p>
+  
+
+  
+  <p>
+    Goroutines run in the same address space, so access to shared memory must be synchronized. The <code>[[http://golang.org/pkg/sync/][sync]]</code> package provides useful primitives, although you won&apos;t need them much in Go as there are other primitives. (See the next slide.)
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/goroutines.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;time&#34;
+)
+
+func say(s string) {
+    for i := 0; i &lt; 5; i++ {
+        time.Sleep(100 * time.Millisecond)
+        fmt.Println(s)
+    }
+}
+
+func main() {
+    go say(&#34;world&#34;)
+    say(&#34;hello&#34;)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Channels</h2>
+  
+  
+  <p>
+    Channels are a typed conduit through which you can send and receive values with the channel operator, <code>&lt;-</code>.
+  </p>
+  
+
+  
+  <pre>ch &lt;- v    // Send v to channel ch.
+v := &lt;-ch  // Receive from ch, and
+           // assign value to v.</pre>
+  
+
+  
+  <p>
+    (The data flows in the direction of the arrow.)
+  </p>
+  
+
+  
+  <p>
+    Like maps and slices, channels must be created before use:
+  </p>
+  
+
+  
+  <pre>ch := make(chan int)</pre>
+  
+
+  
+  <p>
+    By default, sends and receives block until the other side is ready. This allows goroutines to synchronize without explicit locks or condition variables.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/channels.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+func sum(a []int, c chan int) {
+    sum := 0
+    for _, v := range a {
+        sum += v
+    }
+    c &lt;- sum // send sum to c
+}
+
+func main() {
+    a := []int{7, 2, 8, -9, 4, 0}
+
+    c := make(chan int)
+    go sum(a[:len(a)/2], c)
+    go sum(a[len(a)/2:], c)
+    x, y := &lt;-c, &lt;-c // receive from c
+
+    fmt.Println(x, y, x+y)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Buffered Channels</h2>
+  
+  
+  <p>
+    Channels can be <i>buffered</i>.  Provide the buffer length as the second argument to <code>make</code> to initialize a buffered channel:
+  </p>
+  
+
+  
+  <pre>ch := make(chan int, 100)</pre>
+  
+
+  
+  <p>
+    Sends to a buffered channel block only when the buffer is full. Receives block when the buffer is empty.
+  </p>
+  
+
+  
+  <p>
+    Modify the example to overfill the buffer and see what happens.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/buffered-channels.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+func main() {
+    c := make(chan int, 2)
+    c &lt;- 1
+    c &lt;- 2
+    fmt.Println(&lt;-c)
+    fmt.Println(&lt;-c)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Range and Close</h2>
+  
+  
+  <p>
+    A sender can <code>close</code> a channel to indicate that no more values will be sent. Receivers can test whether a channel has been closed by assigning a second parameter to the receive expression: after
+  </p>
+  
+
+  
+  <pre>v, ok := &lt;-ch</pre>
+  
+
+  
+  <p>
+    <code>ok</code> is <code>false</code> if there are no more values to receive and the channel is closed.
+  </p>
+  
+
+  
+  <p>
+    The loop <code>for i := range c</code> receives values from the channel repeatedly until it is closed.
+  </p>
+  
+
+  
+  <p>
+    <b>Note:</b> Only the sender should close a channel, never the receiver. Sending on a closed channel will cause a panic.
+  </p>
+  
+
+  
+  <p>
+    <b>Another note</b>: Channels aren&apos;t like files; you don&apos;t usually need to close them. Closing is only necessary when the receiver must be told there are no more values coming, such as to terminate a <code>range</code> loop.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/range-and-close.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+)
+
+func fibonacci(n int, c chan int) {
+    x, y := 0, 1
+    for i := 0; i &lt; n; i++ {
+        c &lt;- x
+        x, y = y, x+y
+    }
+    close(c)
+}
+
+func main() {
+    c := make(chan int, 10)
+    go fibonacci(cap(c), c)
+    for i := range c {
+        fmt.Println(i)
+    }
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Select</h2>
+  
+  
+  <p>
+    The <code>select</code> statement lets a goroutine wait on multiple communication operations.
+  </p>
+  
+
+  
+  <p>
+    A <code>select</code> blocks until one of its cases can run, then it executes that case.  It chooses one at random if multiple are ready.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/select.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+func fibonacci(c, quit chan int) {
+    x, y := 0, 1
+    for {
+        select {
+        case c &lt;- x:
+            x, y = y, x+y
+        case &lt;-quit:
+            fmt.Println(&#34;quit&#34;)
+            return
+        }
+    }
+}
+
+func main() {
+    c := make(chan int)
+    quit := make(chan int)
+    go func() {
+        for i := 0; i &lt; 10; i++ {
+            fmt.Println(&lt;-c)
+        }
+        quit &lt;- 0
+    }()
+    fibonacci(c, quit)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Default Selection</h2>
+  
+  
+  <p>
+    The <code>default</code> case in a <code>select</code> is run if no other case is ready.
+  </p>
+  
+
+  
+  <p>
+    Use a <code>default</code> case to try a send or receive without blocking:
+  </p>
+  
+
+  
+  <pre>select {
+case i := &lt;-c:
+	// use i
+default:
+	// receiving from c would block
+}</pre>
+  
+
+  <div class="source"><!--{{.play prog/default-selection.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;time&#34;
+)
+
+func main() {
+    tick := time.Tick(1e8)
+    boom := time.After(5e8)
+    for {
+        select {
+        case &lt;-tick:
+            fmt.Println(&#34;tick.&#34;)
+        case &lt;-boom:
+            fmt.Println(&#34;BOOM!&#34;)
+            return
+        default:
+            fmt.Println(&#34;    .&#34;)
+            time.Sleep(5e7)
+        }
+    }
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide nocode">
+	
+  <h2>Exercise: Equivalent Binary Trees</h2>
+  
+  
+  <p>
+    There can be many different binary trees with the same sequence of values stored at the leaves. For example, here are two binary trees storing the sequence 1, 1, 2, 3, 5, 8, 13.
+  </p>
+  
+
+  
+  <p>
+    A function to check whether two binary trees store the same sequence is quite complex in most languages. We&apos;ll use Go&apos;s concurrency and channels to write a simple solution.
+  </p>
+  
+
+  
+  <p>
+    This example uses the <code>tree</code> package, which defines the type:
+  </p>
+  
+
+  
+  <pre>type Tree struct {
+	Left  *Tree
+	Value int
+	Right *Tree
+}</pre>
+  
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Exercise: Equivalent Binary Trees</h2>
+  
+  
+  <p>
+    <b>1.</b> Implement the <code>Walk</code> function.
+  </p>
+  
+
+  
+  <p>
+    <b>2.</b> Test the <code>Walk</code> function.
+  </p>
+  
+
+  
+  <p>
+    The function <code>tree.New(k)</code> constructs a randomly-structured binary tree holding the values <code>k</code>, <code>2k</code>, <code>3k</code>, ..., <code>10k</code>.
+  </p>
+  
+
+  
+  <p>
+    Create a new channel <code>ch</code> and kick off the walker:
+  </p>
+  
+
+  
+  <pre>go Walk(tree.New(1), ch)</pre>
+  
+
+  
+  <p>
+    Then read and print 10 values from the channel. It should be the numbers 1, 2, 3, ..., 10.
+  </p>
+  
+
+  
+  <p>
+    <b>3.</b> Implement the <code>Same</code> function using <code>Walk</code> to determine whether <code>t1</code> and <code>t2</code> store the same values.
+  </p>
+  
+
+  
+  <p>
+    <b>4.</b> Test the <code>Same</code> function.
+  </p>
+  
+
+  
+  <p>
+    <code>Same(tree.New(1), tree.New(1))</code> should return true, and <code>Same(tree.New(1), tree.New(2))</code> should return false.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/exercise-equivalent-binary-trees.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;code.google.com/p/go-tour/tree&#34;
+
+// Walk walks the tree t sending all values
+// from the tree to the channel ch.
+func Walk(t *tree.Tree, ch chan int)
+
+// Same determines whether the trees
+// t1 and t2 contain the same values.
+func Same(t1, t2 *tree.Tree) bool
+
+func main() {
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>연습: 웹 크롤러</h2>
+  
+  
+  <p>
+    이 연습에서는 고의 동시성 기능을 사용해 웹 크롤러를 병렬화 해 볼 것입니다.
+  </p>
+  
+
+  
+  <p>
+    <code>Crawl</code> 함수를 고쳐서, 같은 URL을 두번 가져오는 중복을 피하면서 URL들을 병렬로 패치하게 고쳐보세요.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/exercise-web-crawler.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+)
+
+type Fetcher interface {
+    // Fetch returns the body of URL and
+    // a slice of URLs found on that page.
+    Fetch(url string) (body string, urls []string, err error)
+}
+
+// Crawl uses fetcher to recursively crawl
+// pages starting with url, to a maximum of depth.
+func Crawl(url string, depth int, fetcher Fetcher) {
+    // TODO: Fetch URLs in parallel.
+    // TODO: Don&#39;t fetch the same URL twice.
+    // This implementation doesn&#39;t do either:
+    if depth &lt;= 0 {
+        return
+    }
+    body, urls, err := fetcher.Fetch(url)
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+    fmt.Printf(&#34;found: %s %q\n&#34;, url, body)
+    for _, u := range urls {
+        Crawl(u, depth-1, fetcher)
+    }
+    return
+}
+
+func main() {
+    Crawl(&#34;http://golang.org/&#34;, 4, fetcher)
+}
+
+// fakeFetcher is Fetcher that returns canned results.
+type fakeFetcher map[string]*fakeResult
+
+type fakeResult struct {
+    body string
+    urls []string
+}
+
+func (f *fakeFetcher) Fetch(url string) (string, []string, error) {
+    if res, ok := (*f)[url]; ok {
+        return res.body, res.urls, nil
+    }
+    return &#34;&#34;, nil, fmt.Errorf(&#34;not found: %s&#34;, url)
+}
+
+// fetcher is a populated fakeFetcher.
+var fetcher = &amp;fakeFetcher{
+    &#34;http://golang.org/&#34;: &amp;fakeResult{
+        &#34;The Go Programming Language&#34;,
+        []string{
+            &#34;http://golang.org/pkg/&#34;,
+            &#34;http://golang.org/cmd/&#34;,
+        },
+    },
+    &#34;http://golang.org/pkg/&#34;: &amp;fakeResult{
+        &#34;Packages&#34;,
+        []string{
+            &#34;http://golang.org/&#34;,
+            &#34;http://golang.org/cmd/&#34;,
+            &#34;http://golang.org/pkg/fmt/&#34;,
+            &#34;http://golang.org/pkg/os/&#34;,
+        },
+    },
+    &#34;http://golang.org/pkg/fmt/&#34;: &amp;fakeResult{
+        &#34;Package fmt&#34;,
+        []string{
+            &#34;http://golang.org/&#34;,
+            &#34;http://golang.org/pkg/&#34;,
+        },
+    },
+    &#34;http://golang.org/pkg/os/&#34;: &amp;fakeResult{
+        &#34;Package os&#34;,
+        []string{
+            &#34;http://golang.org/&#34;,
+            &#34;http://golang.org/pkg/&#34;,
+        },
+    },
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide nocode">
+	
+  <h2>더 살펴볼 곳 들...</h2>
+  
+  
+  <p>
+    우선 <a href="http://golang.org/doc/" target="_blank">Go 문서</a> 사이트에서 시작하는 것이 좋습니다. 여기에서 레퍼런스, 튜토리얼, 비디오 등의 자료를 볼 수 있습니다.
+  </p>
+  
+
+  
+  <p>
+    고 코드를 구성하기와 고로 작업하는 방법을 배우려면, <a href="http://www.youtube.com/watch?v=XCsL89YtqCs" target="_blank">이 스크린캐스트</a>를 보거나, <a href="http://golang.org/doc/code.html" target="_blank">고 코드 작성 방법</a>를 읽어 보세요.
+  </p>
+  
+
+  
+  <p>
+    표준 라이브러리에 대한 도움이 필요하면, <a href="http://golang.org/pkg/" target="_blank">패키지 레퍼런스</a>를 살펴보세요. 고 언어 자체에 대해서는 <a href="http://golang.org/ref/spec" target="_blank">언어 스펙</a>이 도움이 되며, 아마 꽤 쉽게 스펙문서를 읽을 수 있음에 놀라게 될 것입니다.
+  </p>
+  
+
+  
+  <p>
+    더 나아가 고의 동시성(concurrency) 모델을 살펴보려면 코드워크, <a href="http://golang.org/doc/codewalk/sharemem/" target="_blank">통신으로 메모리 공유하기</a>를 보세요.
+  </p>
+  
+
+  
+  <p>
+    코드워크, <a href="http://golang.org/doc/codewalk/functions/" target="_blank">First Class Functions in Go</a>에서는 고의 함수 타입에 관련된 흥미로운 관점을 제공합니다.
+  </p>
+  
+
+  
+  <p>
+    공식 블로그, <a href="http://blog.golang.org/" target="_blank">Go </a>에는 유익한 기사들이 많이 있습니다.
+  </p>
+  
+
+  
+  <p>
+    공식 사이트 <a href="http://golang.org" target="_blank">golang.org</a>를 방문해 더 살펴보세요.
+  </p>
+  
+
+  
+  <p>
+    번역: <a href="https://developers.google.com/groups/chapter/112714242728066184635/" target="_blank">한국 Go 언어 커뮤니티(GDG Golang Korea)</a>
+  </p>
+  
+
+
+</div>
+
+
+</div>
+
+<div id="workspace">
+	<div class="controls">
+		<div><a id="run" href="#run" title="Compile and Run">Run</a><a href="#more" id="more" title="Options">▼</a></div>
+		<ul class="more">
+			<li><a href="#" id="reset">Reset Slide</a></li>
+			<li><a href="#" id="format">Format Source Code</a></li>
+			<li><a href="#" id="kill" class="localMode">Kill Program</a></li>
+			<li><hr></li>
+			<li><a href="#" id="togglesyntax">Syntax-Highlighting: off</a></li>
+			<li><a href="#" id="togglelineno">Line-Numbers: on</a></li>
+		</ul>
+	</div>
+
+	<div id="workspace-top">
+		<div id="workspace-editor">
+			<textarea id="editor" spellcheck="false"></textarea>
+		</div>
+	</div>
+
+	<div id="workspace-bottom">
+		<div id="output"></div>
+	</div>
+</div>
+</div>
+
+</body>
+</html>
