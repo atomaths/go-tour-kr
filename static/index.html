@@ -923,17 +923,17 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Pointers</h2>
+  <h2>포인터</h2>
   
   
   <p>
-    Go has pointers, but no pointer arithmetic.
+    Go언어는 포인터가 있지만, 포인터 연산은 없습니다.
   </p>
   
 
   
   <p>
-    Struct fields can be accessed through a struct pointer. The indirection through the pointer is transparent.
+    구조체 변수는 구조체 포인터를 이용해서 접근 할 수 있습니다. 포인터를 이용한 구조체의 우회접근은 구조체에도 영향을 미칩니다.
   </p>
   
 
@@ -960,23 +960,23 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Struct Literals</h2>
+  <h2>구조체 리터럴</h2>
   
   
   <p>
-    A struct literal denotes a newly allocated struct value by listing the values of its fields.
+    구조체 리터럴은 구조체의 변수들을 나열하여 새로 할당된 구조체의 값을 나타냅니다.
   </p>
   
 
   
   <p>
-    You can list just a subset of fields by using the <code>Name:</code> syntax. (And the order of named fields is irrelevant.)
+    <code>Name</code> 구문을 사용하여 구조체 변수 중 일부를 나열할 수 있습니다. (항목들의 정렬 순서와는 관계가 없습니다.)
   </p>
   
 
   
   <p>
-    The special prefix <code>&amp;</code> constructs a pointer to a struct literal.
+    특별한 접두어 <code>&amp;</code> 를 사용하면 구조체 리터럴에 대한 포인터를 생성할 수 있습니다.
   </p>
   
 
@@ -1006,11 +1006,11 @@ func main() {
 
 <div class="slide">
 	
-  <h2>The new function</h2>
+  <h2>new 함수</h2>
   
   
   <p>
-    The expression <code>new(T)</code> allocates a zeroed <code>T</code> value and returns a pointer to it.
+    구문 <code>new(T)</code> 는 `T`라는 빈공간을 가진 변수를 할당 하고, `T`의 포인터를 반환합니다. 
   </p>
   
 
@@ -1020,12 +1020,18 @@ func main() {
 
   
   <p>
-    or
+    또는
   </p>
   
 
   
   <pre>t := new(T)</pre>
+  
+
+  
+  <p>
+    위의 변수 t는 <code>T</code> 에서 반환된 포인터를 가집니다.
+  </p>
   
 
   <div class="source"><!--{{.play prog/the-new-function.go}}
@@ -1242,13 +1248,13 @@ func main() {
   
   
   <p>
-    A slice points to an array of values and also includes a length.
+    Slice는 값들의 배열을 가리키는 동시에 길이를 포함하여 갖습니다.
   </p>
   
 
   
   <p>
-    <code>[]T</code> is a slice with elements of type <code>T</code>.
+    `[]T`는 원소 `T`의 자료형으로 분할합니다.
   </p>
   
 
