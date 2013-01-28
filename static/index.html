@@ -165,7 +165,7 @@ func main() {
   
   
   <p>
-    This code groups the imports into a parenthesized, &quot;factored&quot; import statement. You can also write multiple import statements, like:
+    옆의 import 코드는 &quot;factored&quot; import 문이라고 하는 중괄호 안에 import 할 패키지를 넣는 방식입니다. 물론 아래처럼 import 문을 각각 따로 해도 됩니다.
   </p>
   
 
@@ -197,25 +197,25 @@ func main() {
   
   
   <p>
-    After importing a package, you can refer to the names it exports.
+    패지지를 import 한 후에는 그 패키지가 외부로 export 한 것들(메서드나 변수, 상수 등)에 접근할 수 있습니다.
   </p>
   
 
   
   <p>
-    In Go, a name is exported if it begins with a capital letter.
+    Go에서는 첫 문자가 대문자로 시작하면 그 패키지를 사용하는 곳에서 접근할 수 있는 exported name이 됩니다.
   </p>
   
 
   
   <p>
-    <code>Foo</code> is an exported name, as is <code>FOO</code>. The name <code>foo</code> is not exported.
+    `Foo`나 `FOO`는 exported name 입니다. `foo`는 exported 되지 않은 이름입니다.
   </p>
   
 
   
   <p>
-    Run the code. Then rename <code>math.pi</code> to <code>math.Pi</code> and try it again.
+    코드를 실행해보세요. 그리고 `math.pi`를 `math.Pi`로 바꿔서 다시 실행해보세요.
   </p>
   
 
