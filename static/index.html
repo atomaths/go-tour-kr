@@ -237,29 +237,29 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Functions</h2>
+  <h2>함수(1)</h2>
   
   
   <p>
-    A function can take zero or more arguments.
+    함수는 매개변수(인자)를 가질 수 있습니다.
   </p>
   
 
   
   <p>
-    In this example, <code>add</code> takes two parameters of type <code>int</code>.
+    예를 들어 <code>add</code> 라는 함수는 두개의 <code>int</code> 타입 매개변수를 받습니다.
   </p>
   
 
   
   <p>
-    Notice that the type comes <i>after</i> the variable name.
+    매개변수의 타입은 변수명 <i>뒤에</i> 명시합니다.
   </p>
   
 
   
   <p>
-    (For more about why types look the way they do, see the <a href="http://golang.org/doc/articles/gos_declaration_syntax.html" target="_blank">article on Go&apos;s declaration syntax</a>.)
+    (타입을 왜 변수명 뒤에 명시하는지에 대한 자세한 내용은 <a href="http://golang.org/doc/articles/gos_declaration_syntax.html" target="_blank">Go&apos;s declaration syntax</a>를 참고하시기 바랍니다.)
   </p>
   
 
@@ -282,17 +282,17 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Functions continued</h2>
+  <h2>함수(2)</h2>
   
   
   <p>
-    When two or more consecutive named function parameters share a type, you can omit the type from all but the last.
+    함수의 두 개 이상의 매개변수가 같은 타입(type)일 때, 같은 타입을 취하는 마지막 매개변수에만 타입을 명시하고 나머지는 생략할 수 있습니다.)
   </p>
   
 
   
   <p>
-    In this example, we shortened
+    예를 들어,
   </p>
   
 
@@ -302,12 +302,12 @@ func main() {
 
   
   <p>
-    to
+    과 같은 문장은 아래와 같이 표현할 수 있습니다.
   </p>
   
 
   
-  <pre>x, y int</pre>
+  <pre>x, y</pre>
   
 
   <div class="source"><!--{{.play prog/functions-continued.go}}
@@ -329,17 +329,17 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Multiple results</h2>
+  <h2>여러 개의 결과(Multiple results)</h2>
   
   
   <p>
-    A function can return any number of results.
+    하나의 함수는 여러 개의 결과를 반환할 수 있습니다.
   </p>
   
 
   
   <p>
-    This function returns two strings.
+    이 함수는 두개의 문자열을 반환합니다.
   </p>
   
 
@@ -367,13 +367,13 @@ func main() {
   
   
   <p>
-    Functions take parameters. In Go, functions can return multiple &quot;result parameters&quot;, not just a single value. They can be named and act just like variables.
+    함수는 매개변수를 취합니다. Go에서 함수는 여러 개의 &quot;결과 매개변수(result parameters)&quot;를 반환할 수 있습니다. 반환 값들에게 이름을 부여하면 변수처럼 사용할 수 있습니다.
   </p>
   
 
   
   <p>
-    If the result parameters are named, a <code>return</code> statement without arguments returns the current values of the results.
+    결과 매개변수에 이름을 붙히면, 반환 값을 지정하지 않은 <code>return</code> 문장으로 결과의 현재 값을 반환할 수 있습니다.
   </p>
   
 
@@ -428,7 +428,7 @@ func main() {
   
   
   <p>
-    변수 선언과 함께 변수 마다 초기화를 할 수 있습니다.
+    변수 선언과 함께 변수 각각을 초기화를 할 수 있습니다.
   </p>
   
 
@@ -460,7 +460,7 @@ func main() {
   
   
   <p>
-    함수 내에서 <code>:=</code> 할당을 `var`과 명시적인 타입(e.g. int, bool) 선언 대신 사용할 수 있습니다.
+    함수 내에서 <code>:=</code> 을 `var`과 명시적인 타입(e.g. int, bool) 선언 대신 사용할 수 있습니다.
   </p>
   
 
@@ -571,7 +571,7 @@ func main() {
 
 <div class="slide">
 	
-  <h2>For</h2>
+  <h2>For(반복문 for)</h2>
   
   
   <p>
