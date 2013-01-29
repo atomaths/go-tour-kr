@@ -2886,26 +2886,26 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Default Selection</h2>
+  <h2>셀렉트의 디폴트(default) 케이스</h2>
   
   
   <p>
-    The <code>default</code> case in a <code>select</code> is run if no other case is ready.
+    `select`의 <code>default</code> 케이스는 현재 수행 준비가 완료된 케이스가 없을 때 수행됩니다.
   </p>
   
 
   
   <p>
-    Use a <code>default</code> case to try a send or receive without blocking:
+    블로킹 없이(비동기적인) 송/수신을 하고자 할 때 <code>default</code> 케이스를 사용하세요.
   </p>
   
 
   
   <pre>select {
 case i := &lt;-c:
-	// use i
+	// i를 사용
 default:
-	// receiving from c would block
+	// c로부터의 수신은 블록된 상태
 }</pre>
   
 
