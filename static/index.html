@@ -209,7 +209,7 @@ func main() {
 
   
   <p>
-    `Foo`나 `FOO`는 exported name 입니다. `foo`는 exported 되지 않은 이름입니다.
+    <code>Foo</code> 나 <code>FOO</code> 는 exported name 입니다. <code>foo</code> 는 exported 되지 않은 이름입니다.
   </p>
   
 
@@ -1056,17 +1056,17 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Maps</h2>
+  <h2>맵</h2>
   
   
   <p>
-    A map maps keys to values.
+    맵은 키를 값에 대응시킵니다.
   </p>
   
 
   
   <p>
-    Maps must be created with <code>make</code> (not <code>new</code>) before use; the <code>nil</code> map is empty and cannot be assigned to.
+    맵은 사용 전에 반드시 <code>new</code> 가 아닌 <code>make</code> 로 만들어져야 합니다; <code>nil</code> 맵은 비어있는 상태이고 할당될 수 없습니다.
   </p>
   
 
@@ -1095,11 +1095,11 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Map literals</h2>
+  <h2>맵 리터럴</h2>
   
   
   <p>
-    Map literals are like struct literals, but the keys are required.
+    맵 리터럴은 구조체 리터럴과 같지만 키는 필수적입니다.
   </p>
   
 
@@ -1131,11 +1131,11 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Map literals continued</h2>
+  <h2>맵 리터럴 (앞에 이어서)</h2>
   
   
   <p>
-    If the top-level type is just a type name, you can omit it from the elements of the literal.
+    만일 최상위 타입이 단지 타입이름이라면, 해당 리터럴의 구성요소로부터 최상위 타입을 생략할 수 있습니다.
   </p>
   
 
@@ -1163,11 +1163,11 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Mutating Maps</h2>
+  <h2>맵 변형하기</h2>
   
   
   <p>
-    Insert or update an element in map <code>m</code>:
+    맵 <code>m</code> 에서 하나의 구성요소를 삽입 혹은 갱신하기:
   </p>
   
 
@@ -1177,7 +1177,7 @@ func main() {
 
   
   <p>
-    Retrieve an element:
+    하나의 구성요소를 검색하기:
   </p>
   
 
@@ -1187,7 +1187,7 @@ func main() {
 
   
   <p>
-    Delete an element:
+    하나의 구성요소를 삭제하기:
   </p>
   
 
@@ -1197,7 +1197,7 @@ func main() {
 
   
   <p>
-    Test that a key is present with a two-value assignment:
+    키가 두 값의 할당으로 존재하는지 테스트하기:
   </p>
   
 
@@ -1207,13 +1207,13 @@ func main() {
 
   
   <p>
-    If <code>key</code> is in <code>m</code>, <code>ok</code> is <code>true</code>. If not, <code>ok</code> is <code>false</code> and <code>elem</code> is the zero value for the map&apos;s element type.
+    만일 <code>key</code> 가 <code>m</code> 안에 있다면, <code>ok</code> 는 <code>true</code> 가 됩니다. 그렇지 않다면, <code>ok</code> 는 <code>false</code> 가 되고 <code>elem</code> 은 맵의 구성요소 타입에 대한 초기값이 됩니다.
   </p>
   
 
   
   <p>
-    Similarly, when reading from a map if the key is not present the result is the zero value for the map&apos;s element type.
+    이와 비슷하게도, 맵에서 읽을 때 만일 키가 없다면 결과값은 맵의 구성요소 타입에 대한 초기값이 됩니다.
   </p>
   
 
