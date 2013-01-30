@@ -2940,23 +2940,23 @@ func main() {
 
 <div class="slide nocode">
 	
-  <h2>Exercise: Equivalent Binary Trees</h2>
+  <h2>연습: 동등한 이진 트리</h2>
   
   
   <p>
-    There can be many different binary trees with the same sequence of values stored at the leaves. For example, here are two binary trees storing the sequence 1, 1, 2, 3, 5, 8, 13.
+    노드(leaf)들에 있는 값들의 정렬 순열는 같지만 생김새가 다른 이진트리가 있을 수 있습니다. 예를들어, 다음 그림의 두 이진 트리를 정렬 순열는 1, 1, 2, 3, 5, 8, 13 으로 같습니다.
   </p>
   
 
   
   <p>
-    A function to check whether two binary trees store the same sequence is quite complex in most languages. We&apos;ll use Go&apos;s concurrency and channels to write a simple solution.
+    대부분의 프로그래밍 언어에서 두 이진 트리가 같은 순열인지를 검사하는 함수의 구현은 복잡합니다. 이제 고의 동시성과 채널을 사용한 단순한 방법으로 해결해 봅시다.
   </p>
   
 
   
   <p>
-    This example uses the <code>tree</code> package, which defines the type:
+    이 예제는 다음의 `Tree`구조체가 정의된 `tree`패키지를 사용합니다.
   </p>
   
 
@@ -2973,29 +2973,29 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Exercise: Equivalent Binary Trees</h2>
+  <h2>연습: 동등한 이진 트리</h2>
   
   
   <p>
-    <b>1.</b> Implement the <code>Walk</code> function.
+    <b>1.</b> <code>Walk</code> 함수를 구현하세요.
   </p>
   
 
   
   <p>
-    <b>2.</b> Test the <code>Walk</code> function.
+    <b>2.</b> <code>Walk</code> 함수를 테스트 해 보세요.
   </p>
   
 
   
   <p>
-    The function <code>tree.New(k)</code> constructs a randomly-structured binary tree holding the values <code>k</code>, <code>2k</code>, <code>3k</code>, ..., <code>10k</code>.
+    함수 `tree.New(k)`는 <code>k</code>, <code>2k</code>, <code>3k</code>, ..., `10k`의 값을 가지는, 무작위로 구성된 이진트리를 만들어 냅니다.
   </p>
   
 
   
   <p>
-    Create a new channel <code>ch</code> and kick off the walker:
+    채널 `ch`를 만들고, 작성한 `Walk`함수의 인자로 넣어 줍니다.
   </p>
   
 
@@ -3005,25 +3005,25 @@ func main() {
 
   
   <p>
-    Then read and print 10 values from the channel. It should be the numbers 1, 2, 3, ..., 10.
+    이제 채널에서 10개의 값을 읽어 봅니다. 읽힌 값은 1, 2, 3, ..., 10 이어야 합니다.
   </p>
   
 
   
   <p>
-    <b>3.</b> Implement the <code>Same</code> function using <code>Walk</code> to determine whether <code>t1</code> and <code>t2</code> store the same values.
+    <b>3.</b> <code>Walk</code> 함수를 사용해 두 트리 `t1`과 `t2`이 값은 값들을 가지고 있는지 비교하는 `Same`함수를 구현해 보세요.
   </p>
   
 
   
   <p>
-    <b>4.</b> Test the <code>Same</code> function.
+    <b>4.</b> <code>Same</code> 함수를 테스트 해 보세요.
   </p>
   
 
   
   <p>
-    <code>Same(tree.New(1), tree.New(1))</code> should return true, and <code>Same(tree.New(1), tree.New(2))</code> should return false.
+    `Same(tree.New(1),`tree.New(1))`의 수행결과는 true, `Same(tree.New(1),`tree.New(2))`의 수행 결과는 false 이어야 합니다.
   </p>
   
 
