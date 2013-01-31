@@ -1244,11 +1244,11 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Slices</h2>
+  <h2>슬라이스</h2>
   
   
   <p>
-    Slice는 값들의 배열을 가리키는 동시에 길이를 포함하여 갖습니다.
+    슬라이스는 값들의 배열을 가리키는 동시에 길이를 포함하여 갖습니다.
   </p>
   
 
@@ -1279,17 +1279,17 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Slicing slices</h2>
+  <h2>슬라이스 자르기</h2>
   
   
   <p>
-    Slices can be re-sliced, creating a new slice value that points to the same array.
+    슬라이스는 분할 할 있습니다. 새로운 슬라이스는 같은 배열을 이용하여 만들어 집니다. 
   </p>
   
 
   
   <p>
-    The expression
+    표현식
   </p>
   
 
@@ -1299,7 +1299,7 @@ func main() {
 
   
   <p>
-    evaluates to a slice of the elements from <code>lo</code> through <code>hi-1</code>, inclusive. Thus
+    슬라이스는 `lo`부터 `hi-1`까지의 원소를 포함합니다. 그러므로
   </p>
   
 
@@ -1309,7 +1309,7 @@ func main() {
 
   
   <p>
-    is empty and
+    는 빈 슬라이스 입니다.
   </p>
   
 
@@ -1319,7 +1319,7 @@ func main() {
 
   
   <p>
-    has one element.
+    는 하나의 원소를 갖습니다.
   </p>
   
 
@@ -1346,11 +1346,11 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Making slices</h2>
+  <h2>슬라이스 만들기</h2>
   
   
   <p>
-    Slices are created with the <code>make</code> function. It works by allocating a zeroed array and returning a slice that refers to that array:
+    슬라이스는 `make`함수를 이용하여 만듭니다. 0 으로 할당된 배열과 그 배열을 참조하는 슬라이스를 반환합니다.
   </p>
   
 
@@ -1360,7 +1360,7 @@ func main() {
 
   
   <p>
-    To specify a capacity, pass a third argument to <code>make</code>:
+    슬라이스의 용량을 구체적으로 하기 위해 `make`함수에 세번째 인자를 넣습니다.
   </p>
   
 
@@ -1398,23 +1398,23 @@ func printSlice(s string, x []int) {
 
 <div class="slide">
 	
-  <h2>Nil slices</h2>
+  <h2>비어있는 슬라이스</h2>
   
   
   <p>
-    The zero value of a slice is <code>nil</code>.
+    아무 값도 없는 슬라이스의 값은 `nil`로 표현합니다.
   </p>
   
 
   
   <p>
-    A nil slice has a length and capacity of 0.
+    이러한 슬라이스의 길이와 크기와 용량이 모두 0 입니다.
   </p>
   
 
   
   <p>
-    (To learn more about slices, read the <a href="http://golang.org/doc/articles/slices_usage_and_internals.html" target="_blank">Slices: usage and internals</a> article.)
+    (슬라이스에 대하여 더 알고 싶으면 <a href="http://golang.org/doc/articles/slices_usage_and_internals.html" target="_blank">Slices: usage and internals</a> 이 글을 참고하세요.)
   </p>
   
 
@@ -1437,11 +1437,14 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Function values</h2>
+  <h2>함수 값</h2>
   
   
   <p>
-    Functions are values too.
+    함수는 값 입니다.
+
+
+    (번역자 : 맨 아래 <code>hypot(3,4)</code> 의 hypot 함수를 Println함수의 인자값 처럼 사용 하고 있습니다.)
   </p>
   
 
@@ -1467,17 +1470,17 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Function closures</h2>
+  <h2>함수 Closure</h2>
   
   
   <p>
-    And functions are full closures.
+    모든 함수는 Closure 입니다.
   </p>
   
 
   
   <p>
-    The <code>adder</code> function returns a closure. Each closure is bound to its own <code>sum</code> variable.
+    <code>adder</code> 함수는 closure를 반환합니다. 각각의 closure 는  자신의 <code>sum</code> 변수에 바인딩 됩니다.
   </p>
   
 
