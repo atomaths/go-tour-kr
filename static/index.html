@@ -1918,24 +1918,24 @@ func main() {
 
 <div class="slide nocode">
 	
-  <h2>Methods and Interfaces</h2>
+  <h2>메소드(method)와 인터페이스(Interface)</h2>
   
 
 </div>
 
 <div class="slide">
 	
-  <h2>Methods</h2>
+  <h2>메소드</h2>
   
   
   <p>
-    Go does not have classes. However, you can define methods on struct types.
+    고에는 클래스가 없습니다. 하지만 메소드를 구조체(struct)에 붙일 수 있습니다.
   </p>
   
 
   
   <p>
-    The <i>method receiver</i> appears in its own argument list between the <code>func</code> keyword and the method name.
+    <i>메소스 리시버(method receiver)</i> 는 <code>func</code> 키워드와 메소드의 이름 사이에 인자로 들어갑니다.
   </p>
   
 
@@ -1966,17 +1966,17 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Methods continued</h2>
+  <h2>메소드 계속</h2>
   
   
   <p>
-    In fact, you can define a method on <i>any</i> type you define in your package, not just structs.
+    사실 메소드는 구조체(struct) 뿐 아니라 아무 타입(type)에나 붙일 수 있습니다.
   </p>
   
 
   
   <p>
-    You cannot define a method on a type from another package, or on a basic type.
+    다른 패키지에 있는 타입이나 기본 타입들에 메소드를 붙이는 것은 불가능합니다.
   </p>
   
 
@@ -2008,41 +2008,44 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Methods with pointer receivers</h2>
+  <h2>포인터 리시버를 가지는 메소드</h2>
   
   
   <p>
-    Methods can be associated with a named type or a pointer to a named type.
+    메소드는 이름이 있는 타입 또는 이름이 있는 타입의 포인터와 연결할 수 있습니다.
   </p>
   
 
   
   <p>
-    We just saw two <code>Abs</code> methods. One on the <code>*Vertex</code> pointer type and the other on the <code>MyFloat</code> value type.
+    방금 두 개의 <code>Abs</code> 메소르를 보았는데, 하나는 `*Vertex`라는 포인터 타입의 메소드고, 다른 하나는 <code>MyFloat</code> 값 타입의 메소드 입니다.
   </p>
   
 
   
   <p>
-    There are two reasons to use a pointer receiver. First, to avoid copying the value on each method call (more efficient if the value type is a large struct). Second, so that the method can modify the value that its receiver points to.
+    포인터 리시버를 사용하는 이유는 두 가지 입니다. 첫째, 매소드가 호출될 때 마다 값이 복사되는 것(큰 구조체 타입인 경우 값이 복사되는 것은 비효율적이죠)을 방지하기 위함 입니다. 다른 이유는 메소드에서 리시버 포인터가 가르키는 값을 수정하기 위함 입니다.
   </p>
   
 
   
   <p>
-    Try changing the declarations of the <code>Abs</code> and <code>Scale</code> methods to use <code>Vertex</code> as the receiver, instead of <code>*Vertex</code>.
+    `*Vertex`타입의 리시버 대신 `Vertex`를 사용하도록 메소드 `Abs`와 `Scale`의 선언부분을 바꿔 보세요.
   </p>
   
 
   
   <p>
-    The <code>Scale</code> method has no effect when <code>v</code> is a <code>Vertex</code>. <code>Scale</code> mutates <code>v</code>. When <code>v</code> is a value (non-pointer) type, the method sees a copy of the <code>Vertex</code> and cannot mutate the original value.
+    `v`를 `Vertex`타입으로 받으면 <code>Scale</code> 메소드가 더 이상 동작하지 않습니다. `Scale`은 `v`를 바꾸는데, `v`가 (포인터가 아닌) 값 타입이 때문에 `Vertex`타입인 복사본에 작업을 하기 때문에 원래의 값은 바뀌지 않습니다.
   </p>
   
 
   
   <p>
     <code>Abs</code> works either way. It only reads <code>v</code>. It doesn&apos;t matter whether it is reading the original value (through a pointer) or a copy of that value.
+
+
+    `Abs`의 경우는 다릅니다. 여기서는 `v`를 읽기만 하기 때문에, (포인터가 가르키는) 원래의 값이건 복사본이건 상관이 없게 됩니다.
   </p>
   
 
