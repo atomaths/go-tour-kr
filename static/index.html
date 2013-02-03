@@ -1513,11 +1513,11 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Range</h2>
+  <h2>레인지(Range)</h2>
   
   
   <p>
-    The <code>range</code> form of the <code>for</code> loop iterates over a slice or map.
+    <code>for</code> 반복문에서의 <code>range</code> 구문은 슬라이스나 맵의 원소들에 대한 반복 수행을 합니다.
   </p>
   
 
@@ -1540,17 +1540,17 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Range continued</h2>
+  <h2>레인지(Range) 2</h2>
   
   
   <p>
-    You can skip the index or value by assigning to <code>_</code>.
+    값을 `_`에 할당함으로써 인덱스나 값을 사용하지 않을 수 있습니다.
   </p>
   
 
   
   <p>
-    If you only want the index, drop the “`,`value`” entirely.
+    인덱스만 원한다면 &quot;`,`value`&quot; 부분을 완전히 제거하면 됩니다.
   </p>
   
 
@@ -1575,17 +1575,17 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Switch</h2>
+  <h2>스위치(Switch)</h2>
   
   
   <p>
-    You probably knew what <code>switch</code> was going to look like.
+    <code>switch</code> 가 어떤 건지는 아실 겁니다.
   </p>
   
 
   
   <p>
-    A case body breaks automatically, unless it ends with a <code>fallthrough</code> statement.
+    각 case의 코드는 <code>fallthrough</code> 구문으로 끝나지 않는 이상, 자동으로 break 합니다.
   </p>
   
 
@@ -1617,17 +1617,17 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Switch evaluation order</h2>
+  <h2>스위치 동작 순서</h2>
   
   
   <p>
-    Switch cases evaluate cases from top to bottom, stopping when a case succeeds.
+    스위치의 케이스 조건들은 위에서부터 순서대로 평가되며, 참인 케이스를 찾았을 때 평가를 멈춥니다.
   </p>
   
 
   
   <p>
-    (For example,
+    (예를 들어,
   </p>
   
 
@@ -1640,7 +1640,7 @@ case f():
 
   
   <p>
-    does not call <code>f</code> if <code>i==0</code>.)
+    는 <code>i==0</code> 가 참이면 <code>f</code> 는 호출하지 않습니다.)
   </p>
   
 
@@ -1673,17 +1673,17 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Switch with no condition</h2>
+  <h2>조건값 없는 스위치</h2>
   
   
   <p>
-    Switch without a condition is the same as <code>switch true</code>.
+    조건값 없는 스위치는 <code>switch true</code> 와 같습니다.
   </p>
   
 
   
   <p>
-    This construct can be a clean way to write long if-then-else chains.
+    이런 구조는 긴 if-then-else 문을 좀 더 깔끔하게 작성하려 할 때 유용합니다.
   </p>
   
 
@@ -1918,7 +1918,7 @@ func main() {
 
 <div class="slide nocode">
 	
-  <h2>메소드(method)와 인터페이스(Interface)</h2>
+  <h2>메소드(method)와 인터페이스(interface)</h2>
   
 
 </div>
@@ -2082,17 +2082,17 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Interfaces</h2>
+  <h2>인터페이스</h2>
   
   
   <p>
-    An interface type is defined by a set of methods.
+    인터페이스는 메소드의 집합으로 정의됩니다.
   </p>
   
 
   
   <p>
-    A value of interface type can hold any value that implements those methods.
+    그 메소드들의 구현되어 있는 타입의 값은 모두 인터페이스 타입의 값이 될 수 있습니다.
   </p>
   
 
@@ -2144,35 +2144,35 @@ func (v *Vertex) Abs() float64 {
 
 <div class="slide">
 	
-  <h2>Interfaces are satisfied implicitly</h2>
+  <h2>인터페이스 암시적으로 충족됩니다</h2>
   
   
   <p>
-    A type implements an interface by implementing the methods.
+    타입이 인터페이스의 메소드들을 구현하면 인터페이스를 구현한 게 됩니다.
   </p>
   
 
   
   <p>
-    <i>There is no explicit declaration of intent.</i>
+    <i>이를 위해 명시적으로 선언할 게 없습니다.</i>
   </p>
   
 
   
   <p>
-    Implicit interfaces decouple implementation packages from the packages that define the interfaces: neither depends on the other.
+    암시적 인터페이스는 인터페이스를 정의한 패키지로 부터 구현 패키지를 분리(decouple)해 줍니다. 다른 의존성 또한 없음은 물론입니다.
   </p>
   
 
   
   <p>
-    It also encourages the definition of precise interfaces, because you don&apos;t have to find every implementation and tag it with the new interface name.
+    이 특징은 상세하게 인터페이스를 정의하게 독려합니다. 모든 구현을 찾아 새 인터페이스 이름으로 태그할 필요가 없기 때문입니다.
   </p>
   
 
   
   <p>
-    <a href="http://golang.org/pkg/io/" target="_blank">Package io</a> defines <code>Reader</code> and <code>Writer</code>; you don&apos;t have to.
+    <a href="http://golang.org/pkg/io/" target="_blank">패키지 io</a>에 `Reader`와 `Writer`가 정의되어 있습니다. 따로 정의할 필요가 없습니다.
   </p>
   
 
@@ -2212,11 +2212,11 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Errors</h2>
+  <h2>에러(error)</h2>
   
   
   <p>
-    An error is anything that can describe itself as an error string. The idea is captured by the predefined, built-in interface type, <code>error</code>, with its single method, <code>Error</code>, returning a string:
+    에러 문장(string)으로 자신을 표현할 수 있는 것은 모두 에러입니다. 이 아이디어는 문자열(string)을 반환하는 하나의 메소드 `Error`로 구성된 내장 인터페이스 타입 `error`에서 나왔습니다.
   </p>
   
 
@@ -2228,7 +2228,7 @@ func main() {
 
   
   <p>
-    The <code>fmt</code> package&apos;s various print routines automatically know to call the method when asked to print an <code>error</code>.
+    `fmt`패키지의 다양한 출력 루틴들은 `error`의 출력을 요청받았을 때 자동으로 이 메소드를 호출합니다.
   </p>
   
 
