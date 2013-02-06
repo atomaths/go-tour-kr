@@ -509,7 +509,7 @@ func main() {
   
   
   <p>
-    함수 내에서 <code>:=</code> 을 `var`과 명시적인 타입(e.g. int, bool) 선언 대신 사용할 수 있습니다.
+    함수 내에서 <code>:=</code> 을 <code>var</code> 과 명시적인 타입(e.g. int, bool) 선언 대신 사용할 수 있습니다.
   </p>
   
 
@@ -2318,11 +2318,11 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Web servers</h2>
+  <h2>웹 서버</h2>
   
   
   <p>
-    <a href="http://golang.org/pkg/net/http/" target="_blank">Package http</a> serves HTTP requests using any value that implements <code>http.Handler</code>:
+    <a href="http://golang.org/pkg/net/http/" target="_blank">http 패키지</a>는 <code>http.Handler</code> 를 구현한 값을 사용하여 HTTP requests를 제공합니다.:
   </p>
   
 
@@ -2336,13 +2336,13 @@ type Handler interface {
 
   
   <p>
-    In this example, the type <code>Hello</code> implements <code>http.Handler</code>.
+    왼쪽의 코드를 보면 <code>http.Handler</code> 를 구현한 타입 <code>Hello</code> 를 확인할 수 있습니다.
   </p>
   
 
   
   <p>
-    Visit <a href="http://localhost:4000/" target="_blank">http://localhost:4000/</a> to see the greeting.
+    결과를 보기 위해 <a href="http://localhost:4000/" target="_blank">http://localhost:4000/</a> 에 접속해보세요.
   </p>
   
 
@@ -2373,11 +2373,11 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Images</h2>
+  <h2>이미지</h2>
   
   
   <p>
-    <a href="http://golang.org/pkg/image/#Image" target="_blank">Package image</a> defines the <code>Image</code> interface:
+    <a href="http://golang.org/pkg/image/#Image" target="_blank">image 패키지</a>에는 <code>Image</code> 인터페이스가 정의되어 있습니다.
   </p>
   
 
@@ -2393,13 +2393,13 @@ type Image interface {
 
   
   <p>
-    (See <a href="http://golang.org/pkg/image/#Image" target="_blank">the documentation</a> for all the details.)
+    (전체 내용은 <a href="http://golang.org/pkg/image/#Image" target="_blank">패키지 문서</a>를 참고하세요.)
   </p>
   
 
   
   <p>
-    Also, <code>color.Color</code> and <code>color.Model</code> are interfaces, but we&apos;ll ignore that by using the predefined implementations <code>color.RGBA</code> and <code>color.RGBAModel</code>.
+    또한, `color.Color`와 `color.Model`도 인터페이스지만, 여기서는 대신, 패키지에 구현된 `color.RGBA`와 `color.RGBAModel`를 사용하겠습니다.
   </p>
   
 
