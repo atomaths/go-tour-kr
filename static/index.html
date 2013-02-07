@@ -509,7 +509,7 @@ func main() {
   
   
   <p>
-    함수 내에서 <code>:=</code> 을 <code>var</code> 과 명시적인 타입(e.g. int, bool) 선언 대신 사용할 수 있습니다.
+    함수 내에서 <code>:=</code> 을 `var`과 명시적인 타입(e.g. int, bool) 선언 대신 사용할 수 있습니다.
   </p>
   
 
@@ -2322,7 +2322,7 @@ func main() {
   
   
   <p>
-    <a href="http://golang.org/pkg/net/http/" target="_blank">http 패키지</a>는 <code>http.Handler</code> 를 구현한 값을 사용하여 HTTP requests를 제공합니다.:
+    <a href="http://golang.org/pkg/net/http/" target="_blank">Package http</a> 는 <code>http.Handler</code> 를 구현한 어떠한 값을 사용하여 HTTP 요청(requests)을 제공합니다.
   </p>
   
 
@@ -2336,13 +2336,13 @@ type Handler interface {
 
   
   <p>
-    왼쪽의 코드를 보면 <code>http.Handler</code> 를 구현한 타입 <code>Hello</code> 를 확인할 수 있습니다.
+    이 예제에서, <code>Hello</code> 라는 타입은 <code>http.Handler</code> 를 구현합니다.
   </p>
   
 
   
   <p>
-    결과를 보기 위해 <a href="http://localhost:4000/" target="_blank">http://localhost:4000/</a> 에 접속해보세요.
+    인사말을 보기위해서 <a href="http://localhost:4000/" target="_blank">http://localhost:4000/</a> 를 방문하십시오.
   </p>
   
 
@@ -2377,7 +2377,7 @@ func main() {
   
   
   <p>
-    <a href="http://golang.org/pkg/image/#Image" target="_blank">image 패키지</a>에는 <code>Image</code> 인터페이스가 정의되어 있습니다.
+    <a href="http://golang.org/pkg/image/#Image" target="_blank">Package image</a> 는 <code>Image</code> 인터페이스를 정의합니다.
   </p>
   
 
@@ -2393,13 +2393,13 @@ type Image interface {
 
   
   <p>
-    (전체 내용은 <a href="http://golang.org/pkg/image/#Image" target="_blank">패키지 문서</a>를 참고하세요.)
+    (모든 세부사항에 대한 것은 <a href="http://golang.org/pkg/image/#Image" target="_blank">이 문서</a> 를 참고하십시오.)
   </p>
   
 
   
   <p>
-    또한, `color.Color`와 `color.Model`도 인터페이스지만, 여기서는 대신, 패키지에 구현된 `color.RGBA`와 `color.RGBAModel`를 사용하겠습니다.
+    또한, <code>color.Color</code> 와 <code>color.Model</code> 는 인터페이스이지만, 미리 정의된 구현체인 <code>color.RGBA</code> 와 <code>color.RGBAModel</code> 을 사용함으로써 그 인터페이스를 무시할 수 있습니다.
   </p>
   
 
@@ -2544,35 +2544,35 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Exercise: Images</h2>
+  <h2>연습: 이미지</h2>
   
   
   <p>
-    Remember the picture generator you wrote earlier? Let&apos;s write another one, but this time it will return an implementation of <code>image.Image</code> instead of a slice of data.
+    이전의 연습에서 당신이 작성한 그림 생성기를 기억하십니까? 다른 생성기를 만들어봅시다. 하지만 이번에는 데이터의 슬라이스 대신에 <code>image.Image</code> 의 구현체를 반환할 것입니다.
   </p>
   
 
   
   <p>
-    Define your own <code>Image</code> type, implement <a href="http://golang.org/pkg/image/#Image" target="_blank">the necessary methods</a>, and call <code>pic.ShowImage</code>.
+    당신 자신의 <code>Image</code> 타입을 정의하시고, <a href="http://golang.org/pkg/image/#Image" target="_blank">필수 함수들</a> 을 구현하신 다음, <code>pic.ShowImage</code> 를 호출하십시오.
   </p>
   
 
   
   <p>
-    <code>Bounds</code> should return a <code>image.Rectangle</code>, like <code>image.Rect(0, 0, w, h)</code>.
+    <code>Bounds</code> 는 <code>image.Rect(0, 0, w, h)</code> 와 같은 <code>image.Rectangle</code> 을 반환해야 합니다.
   </p>
   
 
   
   <p>
-    <code>ColorModel</code> should return <code>color.RGBAModel</code>.
+    <code>ColorModel</code> 은 <code>color.RGBAModel</code> 을 반환해야 합니다.
   </p>
   
 
   
   <p>
-    <code>At</code> should return a color; the value <code>v</code> in the last picture generator corresponds to <code>color.RGBA{v, v, 255, 255}</code> in this one.
+    <code>At</code> 은 하나의 컬러를 반환해야 합니다; 지난 그림 생성기에서 값 <code>v</code> 는 <code>color.RGBA{v, v, 255, 255}</code> 와 같습니다.
   </p>
   
 
@@ -2597,29 +2597,29 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Exercise: Rot13 Reader</h2>
+  <h2>연습: Rot13 Reader</h2>
   
   
   <p>
-    A common pattern is an <a href="http://golang.org/pkg/io/#Reader" target="_blank">io.Reader</a> that wraps another <code>io.Reader</code>, modifying the stream in some way.
+    어떤 식으로든 스트림을 수정하여 다른 <code>io.Reader</code> 를 감싸는 <a href="http://golang.org/pkg/io/#Reader" target="_blank">io.Reader</a> 는 흔한 패턴입니다.
   </p>
   
 
   
   <p>
-    For example, the <a href="http://golang.org/pkg/compress/gzip/#NewReader" target="_blank">gzip.NewReader</a> function takes an <code>io.Reader</code> (a stream of gzipped data) and returns a <code>*gzip.Reader</code> that also implements <code>io.Reader</code> (a stream of the decompressed data).
+    예컨대, <a href="http://golang.org/pkg/compress/gzip/#NewReader" target="_blank">gzip.NewReader</a> 함수는 <code>io.Reader</code> (gzip으로 압축된 데이터의 스트림) 를 가지고, <code>io.Reader</code> (압축 해제된 데이터의 스트림) 를 구현한 `*gzip.Reader`를 반환합니다.
   </p>
   
 
   
   <p>
-    Implement a <code>rot13Reader</code> that implements <code>io.Reader</code> and reads from an <code>io.Reader</code>, modifying the stream by applying the <a href="http://en.wikipedia.org/wiki/ROT13" target="_blank">ROT13</a> substitution cipher to all alphabetical characters.
+    <a href="http://en.wikipedia.org/wiki/ROT13" target="_blank">ROT13</a> 치환 암호화를 모든 알파벳 문자에 적용함으로써 스트림을 수정하며 <code>io.Reader</code> 를 구현하고 <code>io.Reader</code> 로 부터 읽는 <code>rot13Reader</code> 를 구현하십시오.
   </p>
   
 
   
   <p>
-    The <code>rot13Reader</code> type is provided for you.  Make it an <code>io.Reader</code> by implementing its <code>Read</code> method.
+    <code>rot13Reader</code> 타입은 당신을 위해 제공됩니다. 이 타입의 <code>Read</code> 함수를 구현함으로써 <code>io.Reader</code> 을 만들어 보십시오.
   </p>
   
 
