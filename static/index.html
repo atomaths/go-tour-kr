@@ -188,7 +188,13 @@ func main() {
 
   
   <p>
-    관례상, 패키지명은 import할 패키지의 디렉토리 경로에서 제일 마지막 부분이 됩니다.
+    패키지 이름은 디렉토리 경로의 마지막 이름을 사용하는 것이 규칙입니다. 
+  </p>
+  
+
+  
+  <p>
+    예를 들어 <code>&quot;path/filepath&quot;</code> 를 사용한다면 패키지명은 <code>filepath</code> 입니다.
   </p>
   
 
@@ -210,11 +216,11 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Imports</h2>
+  <h2>임포트 (Imports)</h2>
   
   
   <p>
-    옆의 import 코드는 &quot;factored&quot; import 문이라고 하는 중괄호 안에 import 할 패키지를 넣는 방식입니다. 물론 아래처럼 import 문을 각각 따로 해도 됩니다.
+    이 코드에서는 여러개의 <code>&quot;package&quot;</code> 를 소괄호로 감싸서 import를 표현합니다. 아래와 같이 import 문장을 여러번 사용할 수 도 있습니다.
   </p>
   
 
@@ -242,11 +248,11 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Exported names</h2>
+  <h2>익스포트 (Exported names)</h2>
   
   
   <p>
-    패지지를 import 한 후에는 그 패키지가 외부로 export 한 것들(메서드나 변수, 상수 등)에 접근할 수 있습니다.
+    패키지를 Import 하면 패키지가 외부로 export 한 것들(메서드나 변수, 상수 등)에 접근할 수 있습니다.
   </p>
   
 
@@ -258,13 +264,13 @@ func main() {
 
   
   <p>
-    <code>Foo</code> 나 <code>FOO</code> 는 exported name 입니다. <code>foo</code> 는 exported 되지 않은 이름입니다.
+    예를 들어 <code>Foo</code> 와 <code>FOO</code> 는 외부에서 참조할 수 있지만 <code>foo</code> 는 참조 할 수 없습니다.
   </p>
   
 
   
   <p>
-    코드를 실행해보세요. 그리고 `math.pi`를 `math.Pi`로 바꿔서 다시 실행해보세요.
+    예제를 실행해보세요. 애러가 발생한다면 <code>math.pi</code> 를 <code>math.Pi</code> 로 변경 해보세요.
   </p>
   
 
@@ -286,7 +292,7 @@ func main() {
 
 <div class="slide">
 	
-  <h2>함수(1)</h2>
+  <h2>함수 (1)</h2>
   
   
   <p>
@@ -302,13 +308,13 @@ func main() {
 
   
   <p>
-    매개변수의 타입은 변수명 <i>뒤에</i> 명시합니다.
+    C, C++, Java 언어와 다르게 매개변수의 타입은 변수명 <i>뒤에</i> 명시합니다.
   </p>
   
 
   
   <p>
-    (타입을 왜 변수명 뒤에 명시하는지에 대한 자세한 내용은 <a href="http://golang.org/doc/articles/gos_declaration_syntax.html" target="_blank">Go&apos;s declaration syntax</a>를 참고하시기 바랍니다.)
+    (타입을 왜 변수명 뒤에 명시하는지에 대한 자세한 내용은 <a href="http://golang.org/doc/articles/gos_declaration_syntax.html" target="_blank">Go&apos;s declaration syntax</a>를 참고하시기 바랍니다. 간단히 설명하면 코드를 왼쪽에서 오른쪽으로 읽을 때 자연스럽게 읽기 위해서 입니다.)
   </p>
   
 
@@ -331,17 +337,17 @@ func main() {
 
 <div class="slide">
 	
-  <h2>함수(2)</h2>
+  <h2>함수 (2)</h2>
   
   
   <p>
-    함수의 두 개 이상의 매개변수가 같은 타입(type)일 때, 같은 타입을 취하는 마지막 매개변수에만 타입을 명시하고 나머지는 생략할 수 있습니다.)
+    두 개 이상의 매개변수가 같은 타입(type)일 때, 같은 타입을 취하는 마지막 매개변수에만 타입을 명시하고 나머지는 생략할 수 있습니다.
   </p>
   
 
   
   <p>
-    예를 들어,
+    예를 들어
   </p>
   
 
@@ -378,7 +384,7 @@ func main() {
 
 <div class="slide">
 	
-  <h2>여러 개의 결과(Multiple results)</h2>
+  <h2>여러 개의 결과 (Multiple results)</h2>
   
   
   <p>
@@ -388,7 +394,7 @@ func main() {
 
   
   <p>
-    이 함수는 두개의 문자열을 반환합니다.
+    예제 코드에서의 함수는 두개의 문자열을 반환합니다.
   </p>
   
 
@@ -412,17 +418,17 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Named results</h2>
+  <h2>이름이 정해진 결과 (Named results)</h2>
   
   
   <p>
-    함수는 매개변수를 취합니다. Go에서 함수는 여러 개의 &quot;결과 매개변수(result parameters)&quot;를 반환할 수 있습니다. 반환 값들에게 이름을 부여하면 변수처럼 사용할 수 있습니다.
+    함수는 매개변수를 취합니다. Go에서 함수는 여러 개의 결과를 반환할 수 있습니다. 반환 값에 이름을 부여하면 변수처럼 사용할 수도 있습니다.
   </p>
   
 
   
   <p>
-    결과 매개변수에 이름을 붙히면, 반환 값을 지정하지 않은 <code>return</code> 문장으로 결과의 현재 값을 반환할 수 있습니다.
+    결과에 이름을 붙히면, 반환 값을 지정하지 않은 <code>return</code> 문장으로 결과의 현재 값을 알아서 반환합니다.
   </p>
   
 
@@ -451,7 +457,13 @@ func main() {
   
   
   <p>
-    <code>var</code> 문장은 변수를 선언합니다. 함수의 매개변수 처럼 타입은 문장 끝에 명시합니다.
+    변수를 선언을 위해 <code>var</code> 을 사용합니다.
+  </p>
+  
+
+  
+  <p>
+    함수의 매개변수처럼 타입은 문장 끝에 명시합니다.
   </p>
   
 
@@ -509,13 +521,13 @@ func main() {
   
   
   <p>
-    함수 내에서 <code>:=</code> 을 `var`과 명시적인 타입(e.g. int, bool) 선언 대신 사용할 수 있습니다.
+    함수 내에서 <code>:=</code> 을 사용하면 <code>var</code> 과 명시적인 타입(e.g. int, bool) 을 생략할 수 있습니다.
   </p>
   
 
   
   <p>
-    (함수 밖의 모든 문장의 구조는 키워드로 시작하고, <code>:=</code> 선언은 사용할 수 없습니다.)
+    (그러나 함수 밖에서는 <code>:=</code> 선언을 사용할 수 없습니다.)
   </p>
   
 
@@ -537,7 +549,7 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Constants (상수)</h2>
+  <h2>상수 (Constants)</h2>
   
   
   <p>
@@ -547,7 +559,7 @@ func main() {
 
   
   <p>
-    상수는 문자(character), 문자열(string), 부울(boolean), 숫자(numeric values)일 수 있습니다.
+    상수는 문자(character), 문자열(string), 부울(boolean) 등(values)일 수 있습니다.
   </p>
   
 
@@ -573,23 +585,23 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Numeric Constants (숫자 상수)</h2>
+  <h2>숫자형 상수 (Numeric Constants)</h2>
   
   
   <p>
-    숫자 상수는 매우 정밀도가 높은 <i>값(values)</i> 입니다.
+    숫자형 상수는 _정밀한 값(values)_ 을 표현할 수 있습니다.
   </p>
   
 
   
   <p>
-    타입을 지정하지 않은 상수는 문맥(context)에 맞게 필요로 하는 타입을 가지게 됩니다.
+    타입을 지정하지 않은 상수는 문맥(context)에 따라 타입을 가지게 됩니다.
   </p>
   
 
   
   <p>
-    `needInt(Big)`을 출력하는 것도 한번 해보세요.
+    코드를 통해 <code>needInt(Big)</code> 는 어떤 결과를 출력할지 실험해보세요.
   </p>
   
 
@@ -620,17 +632,23 @@ func main() {
 
 <div class="slide">
 	
-  <h2>For(반복문 for)</h2>
+  <h2>For (반복문 for)</h2>
   
   
   <p>
-    Go 언어는 반복문이 &apos;for&apos;밖에 없습니다.
+    Go 언어는 반복문이 <code>for</code> 밖에 없습니다.
   </p>
   
 
   
   <p>
-    기본적인 &apos;for&apos; 반복문은 C와 Java 언어와 거의 유사합니다. 다른점은 소괄호 ( )를 사용하지 않습니다. 하지만 중괄호 { } 는 필요합니다.
+    기본적인 <code>for</code> 반복문은 C와 Java 언어와 거의 유사합니다. 다른점은 소괄호 ( )가 필요하지 않다는 것입니다.
+  </p>
+  
+
+  
+  <p>
+    하지만 실행문을 위한 중괄호 { } 는 필요합니다.
   </p>
   
 
@@ -653,11 +671,11 @@ func main() {
 
 <div class="slide">
 	
-  <h2>For continued</h2>
+  <h2>For (2)</h2>
   
   
   <p>
-    C와 Java 언어 처럼, 조건문을 제외한 앞 뒤의 문장은 비워도 됩니다.
+    C와 Java에서 처럼 전.후 처리를 제외하고 조건문만 표현할 수도 있습니다.
   </p>
   
 
@@ -680,11 +698,11 @@ func main() {
 
 <div class="slide">
 	
-  <h2>For is Go&#39;s &#34;while&#34;</h2>
+  <h2>Go에서 &#34;While&#34; 사용하기</h2>
   
   
   <p>
-    Go에서 세미콜론 ; 을 사용하지 않은 for문은 C에서의 while 반복문을 의미합니다.
+    이전의 예제에서 처럼 조건문만 표시하면 C언어에서 <code>while</code> 을 사용하듯 <code>for</code> 를 사용할 수 있습니다.
   </p>
   
 
@@ -707,11 +725,11 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Forever</h2>
+  <h2>무한 루프</h2>
   
   
   <p>
-    반복문의 조건문을 생략하면 영원히 반복합니다. 무한반복문을 간결하게 표현할 수 있습니다.
+    for에서 조건문을 생략하면 무한 루프를 간단하게 표현할 수 있습니다.
   </p>
   
 
@@ -729,17 +747,17 @@ func main() {
 
 <div class="slide">
 	
-  <h2>If</h2>
+  <h2>조건문 (If)</h2>
   
   
   <p>
-    <code>if</code> 조건문은 C, Java 언어와 비슷합니다. 하지만 소괄호 `(`)`는 사용하지 않습니다. 하지만 `{`}`는 필요합니다.
+    <code>if</code> 문은 C와 Java와 비슷합니다. 조건 표현을 을 위해 <code>( )</code> 는 사용하지 않습니다. 하지만 실행문을 위한 <code>{ }</code> 는 반드시 작성해야합니다.
   </p>
   
 
   
   <p>
-    어디서 들어본 것 같지 않나요?
+    (For문과 비슷하죠?)
   </p>
   
 
@@ -768,23 +786,29 @@ func main() {
 
 <div class="slide">
 	
-  <h2>If와 간단한 명령문의 사용</h2>
+  <h2>If와 짧은 명령 사용하기</h2>
   
   
   <p>
-    `for`와 같이 `if`조건문은 조건에 따른 결과를 실행하기 전에 예제의 `v := math.Pow(x,n)`과 같은 짧은 명령문을 사용할 수 있습니다.
+    <code>for</code> 처럼 <code>if</code> 에서도 조건문 앞에 짧은 문장을 실행할 수 있습니다.
   </p>
   
 
   
   <p>
-    `if`문에서 선언된 변수는 `if`문안에서만 사용 할 수 있습니다.
+    예제에서는 조건을 비교하기 전에 `v := math.Pow(x,n)` 을 실행했습니다.
   </p>
   
 
   
   <p>
-    (마지막 <code>return</code> 문장의 `lim`을  `v`로 바꿔 보세요.)
+    짧은 실행문을 통해 선언된 변수는 <code>if</code> _안의 범위(scope)_ 에서 만 사용할 수 있습니다.
+  </p>
+  
+
+  
+  <p>
+    (예제 코드의 <code>pow</code> 함수에서 <code>return</code> 전에 <code>v</code> 를 사용해보세요.)
   </p>
   
 
@@ -816,11 +840,11 @@ func main() {
 
 <div class="slide">
 	
-  <h2>If and else</h2>
+  <h2>If와 else</h2>
   
   
   <p>
-    `if`의 간단한 명령문에서 선언된 변수는 `else`의 블럭 안에서도 사용할 수 있습니다.
+    <code>if</code> 에서 짧은 명령문을 통해 선언된 변수는 <code>else</code> 블럭 안에서도 사용할 수 있습니다.
   </p>
   
 
@@ -853,16 +877,23 @@ func main() {
 
 </div>
 
-<div class="slide">
+<div class="slide nocode">
 	
   <h2>기본 자료형</h2>
   
   
   <p>
-    Go 언어의 기본 자료형은 다음과 같습니다
+    Go의 기본 자료형은 아래와 같습니다.
   </p>
   
 
+
+</div>
+
+<div class="slide">
+	
+  <h2>기본 자료형</h2>
+  
   
   <pre>bool
 
@@ -908,17 +939,17 @@ func main() {
 
 <div class="slide">
 	
-  <h2>구조체</h2>
+  <h2>구조체 (Structs)</h2>
   
   
   <p>
-    `구조체`는 데이터들의 묶음입니다.
+    <code>struct</code> 는 필드(데이터)들의 조합입니다.
   </p>
   
 
   
   <p>
-    (구조체 안의 데이터들의  `자료형`은 원하는대로 하면 됩니다.)
+    (그리고 <code>type</code> 선언으로 struct의 이름을 지정할 수 있습니다.)
   </p>
   
 
@@ -942,11 +973,11 @@ func main() {
 
 <div class="slide">
 	
-  <h2>구조체의 데이터</h2>
+  <h2>구조체 필드</h2>
   
   
   <p>
-    구조체가 포함한 데이터들은 `.`을 이용하여 사용할 수 있습니다.
+    구조체에 속한 필드(데이터)는 dot(.) 으로 접근합니다.
   </p>
   
 
@@ -972,17 +1003,23 @@ func main() {
 
 <div class="slide">
 	
-  <h2>포인터</h2>
+  <h2>포인터 (Pointers)</h2>
   
   
   <p>
-    Go언어는 포인터가 있지만, 포인터 연산은 없습니다.
+    Go에는 포인터가 있지만 포인터 연산은 불가능합니다.
   </p>
   
 
   
   <p>
-    구조체 변수는 구조체 포인터를 이용해서 접근 할 수 있습니다. 포인터를 이용한 구조체의 우회접근은 구조체에도 영향을 미칩니다.
+    구조체 변수는 구조체 포인터를 이용해서 접근 할 수 있습니다.
+  </p>
+  
+
+  
+  <p>
+    포인터를 이용하는 간접적인 접근은 실제 구조체에도 영향을 미칩니다.
   </p>
   
 
@@ -1009,17 +1046,17 @@ func main() {
 
 <div class="slide">
 	
-  <h2>구조체 리터럴</h2>
+  <h2>구조체 리터럴 (Struct Literals)</h2>
   
   
   <p>
-    구조체 리터럴은 구조체의 변수들을 나열하여 새로 할당된 구조체의 값을 나타냅니다.
+    구조체 리터럴은 필드와 값을 나열해서 구조체를 새로 할당하는 방법입니다.
   </p>
   
 
   
   <p>
-    <code>Name</code> 구문을 사용하여 구조체 변수 중 일부를 나열할 수 있습니다. (항목들의 정렬 순서와는 관계가 없습니다.)
+    원하는 필드를 `{Name: value}` 구문을 통해 할당할 수 있습니다. (필드의 순서는 상관 없습니다.)
   </p>
   
 
@@ -1059,7 +1096,13 @@ func main() {
   
   
   <p>
-    구문 <code>new(T)</code> 는 `T`라는 빈공간을 가진 변수를 할당 하고, `T`의 포인터를 반환합니다. 
+    <code>new(T)</code> 는 모든 필드가 _0(zero value)_ 이 할당된 <code>T</code> 타입의 포인터를 반환합니다.
+  </p>
+  
+
+  
+  <p>
+    ( _zero value_ 는 숫자 타입에서는 <code>0</code> , 참조 타입에서는 <code>nil</code> 을 뜻합니다 )
   </p>
   
 
@@ -1105,17 +1148,23 @@ func main() {
 
 <div class="slide">
 	
-  <h2>맵</h2>
+  <h2>맵 (Maps)</h2>
   
   
   <p>
-    맵은 키를 값에 대응시킵니다.
+    맵은 값에 키를 지정합니다.
   </p>
   
 
   
   <p>
-    맵은 사용 전에 반드시 <code>new</code> 가 아닌 <code>make</code> 로 만들어져야 합니다; <code>nil</code> 맵은 비어있는 상태이고 할당될 수 없습니다.
+    맵은 반드시 사용하기 전에 <code>make</code> 를 명시해야합니다. (주의: <code>new</code> 가 아닙니다)
+  </p>
+  
+
+  
+  <p>
+    `make`를 수행하지 않은 <code>nil</code> 에는 값을 할당할 수 없습니다.
   </p>
   
 
@@ -1144,11 +1193,11 @@ func main() {
 
 <div class="slide">
 	
-  <h2>맵 리터럴</h2>
+  <h2>맵 리터럴 (Map literals)</h2>
   
   
   <p>
-    맵 리터럴은 구조체 리터럴과 같지만 키는 필수적입니다.
+    맵 리터럴은 구조체 리터럴과 비슷하지만 <code>key</code> 를 반드시 지정해야 합니다.
   </p>
   
 
@@ -1180,11 +1229,31 @@ func main() {
 
 <div class="slide">
 	
-  <h2>맵 리터럴 (앞에 이어서)</h2>
+  <h2>맵 리터럴 (2)</h2>
   
   
   <p>
-    만일 최상위 타입이 단지 타입이름이라면, 해당 리터럴의 구성요소로부터 최상위 타입을 생략할 수 있습니다.
+    만약 가장 상위의 타입이 타입명이라면 리터럴에서 타입명을 생략해도 됩니다.
+  </p>
+  
+
+  
+  <pre>&#34;Bell Labs&#34;: {40.68433, -74.39967}</pre>
+  
+
+  
+  <p>
+    또는
+  </p>
+  
+
+  
+  <pre>&#34;Bell Labs&#34;: Vertex{40.68433, -74.39967}</pre>
+  
+
+  
+  <p>
+    는 같은 표현입니다.
   </p>
   
 
@@ -1212,11 +1281,11 @@ func main() {
 
 <div class="slide">
 	
-  <h2>맵 변형하기</h2>
+  <h2>맵 다루기 (Mutating Maps)</h2>
   
   
   <p>
-    맵 <code>m</code> 에서 하나의 구성요소를 삽입 혹은 갱신하기:
+    맵 <code>m</code> 의 요소를 삽입하거나 수정하기:
   </p>
   
 
@@ -1226,7 +1295,7 @@ func main() {
 
   
   <p>
-    하나의 구성요소를 검색하기:
+    요소 값 가져오기:
   </p>
   
 
@@ -1236,7 +1305,7 @@ func main() {
 
   
   <p>
-    하나의 구성요소를 삭제하기:
+    요소 지우기:
   </p>
   
 
@@ -1246,7 +1315,7 @@ func main() {
 
   
   <p>
-    키가 두 값의 할당으로 존재하는지 테스트하기:
+    키의 존재 여부 확인하기:
   </p>
   
 
@@ -1256,13 +1325,13 @@ func main() {
 
   
   <p>
-    만일 <code>key</code> 가 <code>m</code> 안에 있다면, <code>ok</code> 는 <code>true</code> 가 됩니다. 그렇지 않다면, <code>ok</code> 는 <code>false</code> 가 되고 <code>elem</code> 은 맵의 구성요소 타입에 대한 초기값이 됩니다.
+    위의 <code>ok</code> 의 값은 <code>m</code> 에 <code>key</code> 가 존재한다면 <code>true</code> 존재하지 않으면 <code>false</code>, <code>elem</code> 은 타입에 따라 _0(zero value)_ 가 됩니다.
   </p>
   
 
   
   <p>
-    이와 비슷하게도, 맵에서 읽을 때 만일 키가 없다면 결과값은 맵의 구성요소 타입에 대한 초기값이 됩니다.
+    이처럼 <code>map</code> 을 읽을 때, 존재하지 않는 <code>key</code> 의 반환 값은 타입에 맞는 _zero value_ 입니다.
   </p>
   
 
@@ -1293,17 +1362,17 @@ func main() {
 
 <div class="slide">
 	
-  <h2>슬라이스</h2>
+  <h2>슬라이스 (Slices)</h2>
   
   
   <p>
-    슬라이스는 값들의 배열을 가리키는 동시에 길이를 포함하여 갖습니다.
+    슬라이스는 배열의 값을 가리킵니다(point). 그리고 배열의 길이를 가지고 있습니다.
   </p>
   
 
   
   <p>
-    `[]T`는 원소 `T`의 자료형으로 분할합니다.
+    <code>[]T</code> 는 타입 <code>T</code> 를 가지는 요소의 슬라이스(slice) 입니다.
   </p>
   
 
@@ -1328,17 +1397,17 @@ func main() {
 
 <div class="slide">
 	
-  <h2>슬라이스 자르기</h2>
+  <h2>슬라이스 자르기 (Slicing slices)</h2>
   
   
   <p>
-    슬라이스는 분할 할 있습니다. 새로운 슬라이스는 같은 배열을 이용하여 만들어 집니다. 
+    슬라이스는 재분할 할 수도 있고, 같은 배열을 가리키는(point) 새로운 슬라이스를 만들 수 도 있습니다.
   </p>
   
 
   
   <p>
-    표현식
+    예제로 살펴보면
   </p>
   
 
@@ -1348,7 +1417,7 @@ func main() {
 
   
   <p>
-    슬라이스는 `lo`부터 `hi-1`까지의 원소를 포함합니다. 그러므로
+    위의 표현은 <code>lo</code> 에서 <code>hi-1</code> 의 요소(element)를 포함하는 슬라이스입니다. 따라서
   </p>
   
 
@@ -1358,7 +1427,7 @@ func main() {
 
   
   <p>
-    는 빈 슬라이스 입니다.
+    는 빈(empty) 슬라이스 이고
   </p>
   
 
@@ -1368,7 +1437,7 @@ func main() {
 
   
   <p>
-    는 하나의 원소를 갖습니다.
+    는 하나의 요소를 가집니다.
   </p>
   
 
@@ -1399,7 +1468,7 @@ func main() {
   
   
   <p>
-    슬라이스는 `make`함수를 이용하여 만듭니다. 0 으로 할당된 배열과 그 배열을 참조하는 슬라이스를 반환합니다.
+    슬라이스는 <code>make</code> 함수로 만들 수 있습니다. 이렇게 생성된 슬라이스는 0을 할당한 배열을 생성하고, 그것을 참조(refer)합니다.
   </p>
   
 
@@ -1409,7 +1478,7 @@ func main() {
 
   
   <p>
-    슬라이스의 용량을 구체적으로 하기 위해 `make`함수에 세번째 인자를 넣습니다.
+    <code>make</code> 함수의 세번째 매개변수로 용량(capacity)를 제한할 수 있습니다.
   </p>
   
 
@@ -1447,23 +1516,23 @@ func printSlice(s string, x []int) {
 
 <div class="slide">
 	
-  <h2>비어있는 슬라이스</h2>
+  <h2>빈 슬라이스</h2>
   
   
   <p>
-    아무 값도 없는 슬라이스의 값은 `nil`로 표현합니다.
+    슬라이스의 zero value는 <code>nil</code> 입니다.
   </p>
   
 
   
   <p>
-    이러한 슬라이스의 길이와 크기와 용량이 모두 0 입니다.
+    nil 슬라이스는 길이와 최대 크기가 0입니다.
   </p>
   
 
   
   <p>
-    (슬라이스에 대하여 더 알고 싶으면 <a href="http://golang.org/doc/articles/slices_usage_and_internals.html" target="_blank">Slices: usage and internals</a> 이 글을 참고하세요.)
+    (슬라이스에 대해 더 알고 싶다면 다음 글을 읽어보세요. <a href="http://golang.org/doc/articles/slices_usage_and_internals.html" target="_blank">Slices: usage and internals</a>)
   </p>
   
 
@@ -1486,13 +1555,16 @@ func main() {
 
 <div class="slide">
 	
-  <h2>함수 값</h2>
+  <h2>함수 값 (Function values)</h2>
   
   
   <p>
-    함수는 값 입니다.
+    함수도 값 입니다.
+  </p>
+  
 
-
+  
+  <p>
     (번역자 : 맨 아래 <code>hypot(3,4)</code> 의 hypot 함수를 Println함수의 인자값 처럼 사용 하고 있습니다.)
   </p>
   
@@ -1519,17 +1591,23 @@ func main() {
 
 <div class="slide">
 	
-  <h2>함수 Closure</h2>
+  <h2>함수 클로져 (Function closures)</h2>
   
   
   <p>
-    모든 함수는 Closure 입니다.
+    그리고 함수는 클로져(full closures) 입니다.
   </p>
   
 
   
   <p>
-    <code>adder</code> 함수는 closure를 반환합니다. 각각의 closure 는  자신의 <code>sum</code> 변수에 바인딩 됩니다.
+    코드에서 <code>adder</code> 함수는 클로져(closure)를 반환합니다.
+  </p>
+  
+
+  
+  <p>
+    각각의 클로져는 자신만의 <code>sum</code> 변수를 가집니다.
   </p>
   
 
@@ -1562,11 +1640,11 @@ func main() {
 
 <div class="slide">
 	
-  <h2>레인지(Range)</h2>
+  <h2>레인지 (Range, 범위)</h2>
   
   
   <p>
-    <code>for</code> 반복문에서의 <code>range</code> 구문은 슬라이스나 맵의 원소들에 대한 반복 수행을 합니다.
+    <code>for</code> 반복문에서 <code>range</code> 를 사용하면 슬라이스나 맵을 순회(iterates)할 수 있습니다.
   </p>
   
 
@@ -1589,17 +1667,53 @@ func main() {
 
 <div class="slide">
 	
-  <h2>레인지(Range) 2</h2>
+  <h2>레인지 (2)</h2>
   
   
   <p>
-    값을 `_`에 할당함으로써 인덱스나 값을 사용하지 않을 수 있습니다.
+    <code>_</code> 를 이용해서 인덱스(index)나 값(value)를 무시할 수 있습니다.
   </p>
   
 
   
   <p>
-    인덱스만 원한다면 &quot;`,`value`&quot; 부분을 완전히 제거하면 됩니다.
+    만약 인덱스만 필요하다면 “ `, value` ” 부분을 다 제거하면 됩니다.
+  </p>
+  
+
+  
+  <pre>for i, value := range pow {</pre>
+  
+
+  
+  <pre>pow[i] = 1 &lt;&lt; uint(i)</pre>
+  
+
+  
+  <pre>}</pre>
+  
+
+  
+  <p>
+    에서
+  </p>
+  
+
+  
+  <pre>for i := range pow {</pre>
+  
+
+  
+  <pre>pow[i] = 1 &lt;&lt; uint(i)</pre>
+  
+
+  
+  <pre>}</pre>
+  
+
+  
+  <p>
+    처럼 사용할 수 있습니다.
   </p>
   
 
@@ -1624,17 +1738,23 @@ func main() {
 
 <div class="slide">
 	
-  <h2>스위치(Switch)</h2>
+  <h2>스위치 (Switch)</h2>
   
   
   <p>
-    <code>switch</code> 가 어떤 건지는 아실 겁니다.
+    다른 일반적인 언어를 아는 분이라면 <code>switch</code> 에 대해서 잘 알 것입니다.
   </p>
   
 
   
   <p>
-    각 case의 코드는 <code>fallthrough</code> 구문으로 끝나지 않는 이상, 자동으로 break 합니다.
+    다른 언어와 다른점은 case의 코드 실행을 마치면 알아서 break를 한다는 점입니다.
+  </p>
+  
+
+  
+  <p>
+    ( <code>fallthrough</code> 로 끝나는 case는 스스로 break를 하지 않습니다 )
   </p>
   
 
@@ -1670,13 +1790,13 @@ func main() {
   
   
   <p>
-    스위치의 케이스 조건들은 위에서부터 순서대로 평가되며, 참인 케이스를 찾았을 때 평가를 멈춥니다.
+    스위치의 각 조건은 위에서 아래로 평가합니다. 만약 조건이 참인 case를 찾으면 평가를 마칩니다.
   </p>
   
 
   
   <p>
-    (예를 들어,
+    (예를 들어
   </p>
   
 
@@ -1689,7 +1809,7 @@ case f():
 
   
   <p>
-    는 <code>i==0</code> 가 참이면 <code>f</code> 는 호출하지 않습니다.)
+    에서 <code>i==0</code> 이라면 <code>f()</code> 는 실행하지 않습니다)
   </p>
   
 
@@ -1722,17 +1842,17 @@ func main() {
 
 <div class="slide">
 	
-  <h2>조건값 없는 스위치</h2>
+  <h2>조건을 생략한 스위치</h2>
   
   
   <p>
-    조건값 없는 스위치는 <code>switch true</code> 와 같습니다.
+    스위치에서 조건을 생략하면 &quot; <code>switch</code> <code>true</code> &quot; 와 같습니다.
   </p>
   
 
   
   <p>
-    이런 구조는 긴 if-then-else 문을 좀 더 깔끔하게 작성하려 할 때 유용합니다.
+    만약 긴 if-then-else 를 작성해야 할 때, 이 구조를 사용하면 코드를 깔끔하게 작성할 수 있습니다.
   </p>
   
 
@@ -2322,7 +2442,7 @@ func main() {
   
   
   <p>
-    <a href="http://golang.org/pkg/net/http/" target="_blank">Package http</a> 는 <code>http.Handler</code> 를 구현한 어떠한 값을 사용하여 HTTP 요청(requests)을 제공합니다.
+    <a href="http://golang.org/pkg/net/http/" target="_blank">Package http</a> 는 <code>http.Handler</code> 를 구현한 어떠 값을 사용하여 HTTP 요청(requests)을 제공합니다.
   </p>
   
 
@@ -2342,7 +2462,7 @@ type Handler interface {
 
   
   <p>
-    인사말을 보기위해서 <a href="http://localhost:4000/" target="_blank">http://localhost:4000/</a> 를 방문하십시오.
+    이 코드를 로컬에서 실행하고, <a href="http://localhost:4000/" target="_blank">http://localhost:4000/</a> 에 접속해보세요.
   </p>
   
 
