@@ -2543,23 +2543,23 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Exercise: Errors</h2>
+  <h2>연습: 에러</h2>
   
   
   <p>
-    Copy your <code>Sqrt</code> function from the earlier exercises and modify it to return an <code>error</code> value.
+    당신의 <code>Sqrt</code> 함수를 이전 연습에서 복사하고 <code>error</code> 값을 반환하도록 수정하십시오.
   </p>
   
 
   
   <p>
-    <code>Sqrt</code> should return a non-nil error value when given a negative number, as it doesn&apos;t support complex numbers.
+    <code>Sqrt</code> 함수는 복소수를 지원하지 않기 때문에, 음수가 주어지면 <code>nil</code> 이 아닌 에러 값을 반환해야 합니다.
   </p>
   
 
   
   <p>
-    Create a new type
+    새로운 타입을 만드십시오.
   </p>
   
 
@@ -2570,6 +2570,9 @@ func main() {
   
   <p>
     and make it an <code>error</code> by giving it a
+
+
+    그리고 아래 메소드를 구현함으로써 그 타입이 <code>error</code> 가 되게 하십시오.
   </p>
   
 
@@ -2579,19 +2582,19 @@ func main() {
 
   
   <p>
-    method such that <code>ErrNegativeSqrt(-2).Error()</code> returns <code>&quot;cannot Sqrt negative number: -2&quot;</code>.
+    이는 <code>ErrNegativeSqrt(-2).Error()</code> 가 <code>&quot;cannot Sqrt negative number: -2&quot;</code> 를 반환하는 그러한 메소드입니다.
   </p>
   
 
   
   <p>
-    <b>Note:</b> a call to <code>fmt.Print(e)</code> inside the <code>Error</code> method will send the program into an infinite loop. You can avoid this by converting <code>e</code> first: <code>fmt.Print(float64(e))</code>. Why?
+    <b>Note:</b> <code>Error</code> 메소드 내에서 <code>fmt.Print(e)</code> 를 호출하면 이 프로그램을 무한루프에 빠질 것입니다. <code>e</code> 를 바꿈으로써 이 문제를 피할 수 있습니다. 왜 그럴까요?
   </p>
   
 
   
   <p>
-    Change your <code>Sqrt</code> function to return an <code>ErrNegativeSqrt</code> value when given a negative number.
+    음수가 주어졌을 때 <code>ErrNegativeSqrt</code> 값을 반환하도록 당신의 <code>Sqrt</code> 함수를 바꾸십시오.
   </p>
   
 
@@ -2617,11 +2620,11 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Exercise: HTTP Handlers</h2>
+  <h2>연습: HTTP 핸들러</h2>
   
   
   <p>
-    Implement the following types and define ServeHTTP methods on them. Register them to handle specific paths in your web server.
+    아래 나오는 타입을 구현하고 그 타입의 ServeHTTP 메소드를 정의하십시오. 그 메소드를 당신의 웹 서버에서 특정 경로를 처리할 수 있도록 등록하십시오.
   </p>
   
 
@@ -2637,7 +2640,7 @@ type Struct struct {
 
   
   <p>
-    For example, you should be able to register handlers using:
+    예컨대, 당신은 아래와 같이 핸들러를 등록할 수 있어야 합니다.
   </p>
   
 
@@ -3377,7 +3380,7 @@ var fetcher = &amp;fakeFetcher{
 
   
   <p>
-    번역: <a href="https://developers.google.com/groups/chapter/112714242728066184635/" target="_blank">한국 Go 언어 커뮤니티(GDG Golang Korea)</a>
+    번역: <a href="https://developers.google.com/groups/chapter/112714242728066184635/" target="_blank">한국 Go 언어 커뮤니티(GDG Korea Golang)</a>
   </p>
   
 
