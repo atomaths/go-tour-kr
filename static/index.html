@@ -270,7 +270,7 @@ func main() {
 
   
   <p>
-    예제를 실행해보세요. 애러가 발생한다면 <code>math.pi</code> 를 <code>math.Pi</code> 로 변경 해보세요.
+    예제를 실행해보세요. 에러가 발생한다면 <code>math.pi</code> 를 <code>math.Pi</code> 로 변경 해보세요.
   </p>
   
 
@@ -589,7 +589,7 @@ func main() {
   
   
   <p>
-    숫자형 상수는 _정밀한 값(values)_ 을 표현할 수 있습니다.
+    숫자형 상수는 <i>정밀한 값(values)</i> 을 표현할 수 있습니다.
   </p>
   
 
@@ -802,7 +802,7 @@ func main() {
 
   
   <p>
-    짧은 실행문을 통해 선언된 변수는 <code>if</code> _안의 범위(scope)_ 에서 만 사용할 수 있습니다.
+    짧은 실행문을 통해 선언된 변수는 <code>if</code> <i>안쪽 범위(scope)</i> 에서 만 사용할 수 있습니다.
   </p>
   
 
@@ -877,7 +877,64 @@ func main() {
 
 </div>
 
-<div class="slide nocode">
+<div class="slide">
+	
+  <h2>Exercise: Loops and Functions</h2>
+  
+  
+  <p>
+    As a simple way to play with functions and loops, implement the square root function using Newton&apos;s method.
+  </p>
+  
+
+  
+  <p>
+    In this case, Newton&apos;s method is to approximate <code>Sqrt(x)</code> by picking a starting point <i>z</i> and then repeating:
+  </p>
+  
+
+  
+  <p>
+    To begin with, just repeat that calculation 10 times and see how close you get to the answer for various values (1, 2, 3, ...).
+  </p>
+  
+
+  
+  <p>
+    Next, change the loop condition to stop once the value has stopped changing (or only changes by a very small delta). See if that&apos;s more or fewer iterations. How close are you to the <a href="http://golang.org/pkg/math/#Sqrt" target="_blank">math.Sqrt</a>?
+  </p>
+  
+
+  
+  <p>
+    Hint: to declare and initialize a floating point value, give it floating point syntax or use a conversion:
+  </p>
+  
+
+  
+  <pre>z := float64(1)
+z := 1.0</pre>
+  
+
+  <div class="source"><!--{{.play prog/exercise-loops-and-functions.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+)
+
+func Sqrt(x float64) float64 {
+}
+
+func main() {
+    fmt.Println(Sqrt(2))
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
 	
   <h2>기본 자료형</h2>
   
@@ -887,13 +944,6 @@ func main() {
   </p>
   
 
-
-</div>
-
-<div class="slide">
-	
-  <h2>기본 자료형</h2>
-  
   
   <pre>bool
 
@@ -1096,13 +1146,13 @@ func main() {
   
   
   <p>
-    <code>new(T)</code> 는 모든 필드가 _0(zero value)_ 이 할당된 <code>T</code> 타입의 포인터를 반환합니다.
+    <code>new(T)</code> 는 모든 필드가 <i>0(zero value)</i> 이 할당된 <code>T</code> 타입의 포인터를 반환합니다.
   </p>
   
 
   
   <p>
-    ( _zero value_ 는 숫자 타입에서는 <code>0</code> , 참조 타입에서는 <code>nil</code> 을 뜻합니다 )
+    ( <i>zero value</i> 는 숫자 타입에서는 <code>0</code> , 참조 타입에서는 <code>nil</code> 을 뜻합니다 )
   </p>
   
 
@@ -1140,220 +1190,6 @@ func main() {
     fmt.Println(v)
     v.X, v.Y = 11, 9
     fmt.Println(v)
-}
-</pre><pre style="display: none"></pre></div>
-
-
-</div>
-
-<div class="slide">
-	
-  <h2>맵 (Maps)</h2>
-  
-  
-  <p>
-    맵은 값에 키를 지정합니다.
-  </p>
-  
-
-  
-  <p>
-    맵은 반드시 사용하기 전에 <code>make</code> 를 명시해야합니다. (주의: <code>new</code> 가 아닙니다)
-  </p>
-  
-
-  
-  <p>
-    `make`를 수행하지 않은 <code>nil</code> 에는 값을 할당할 수 없습니다.
-  </p>
-  
-
-  <div class="source"><!--{{.play prog/maps.go}}
---><pre style="display: none"></pre><pre>package main
-
-import &#34;fmt&#34;
-
-type Vertex struct {
-    Lat, Long float64
-}
-
-var m map[string]Vertex
-
-func main() {
-    m = make(map[string]Vertex)
-    m[&#34;Bell Labs&#34;] = Vertex{
-        40.68433, -74.39967,
-    }
-    fmt.Println(m[&#34;Bell Labs&#34;])
-}
-</pre><pre style="display: none"></pre></div>
-
-
-</div>
-
-<div class="slide">
-	
-  <h2>맵 리터럴 (Map literals)</h2>
-  
-  
-  <p>
-    맵 리터럴은 구조체 리터럴과 비슷하지만 <code>key</code> 를 반드시 지정해야 합니다.
-  </p>
-  
-
-  <div class="source"><!--{{.play prog/map-literals.go}}
---><pre style="display: none"></pre><pre>package main
-
-import &#34;fmt&#34;
-
-type Vertex struct {
-    Lat, Long float64
-}
-
-var m = map[string]Vertex{
-    &#34;Bell Labs&#34;: Vertex{
-        40.68433, -74.39967,
-    },
-    &#34;Google&#34;: Vertex{
-        37.42202, -122.08408,
-    },
-}
-
-func main() {
-    fmt.Println(m)
-}
-</pre><pre style="display: none"></pre></div>
-
-
-</div>
-
-<div class="slide">
-	
-  <h2>맵 리터럴 (2)</h2>
-  
-  
-  <p>
-    만약 가장 상위의 타입이 타입명이라면 리터럴에서 타입명을 생략해도 됩니다.
-  </p>
-  
-
-  
-  <pre>&#34;Bell Labs&#34;: {40.68433, -74.39967}</pre>
-  
-
-  
-  <p>
-    또는
-  </p>
-  
-
-  
-  <pre>&#34;Bell Labs&#34;: Vertex{40.68433, -74.39967}</pre>
-  
-
-  
-  <p>
-    는 같은 표현입니다.
-  </p>
-  
-
-  <div class="source"><!--{{.play prog/map-literals-continued.go}}
---><pre style="display: none"></pre><pre>package main
-
-import &#34;fmt&#34;
-
-type Vertex struct {
-    Lat, Long float64
-}
-
-var m = map[string]Vertex{
-    &#34;Bell Labs&#34;: {40.68433, -74.39967},
-    &#34;Google&#34;:    {37.42202, -122.08408},
-}
-
-func main() {
-    fmt.Println(m)
-}
-</pre><pre style="display: none"></pre></div>
-
-
-</div>
-
-<div class="slide">
-	
-  <h2>맵 다루기 (Mutating Maps)</h2>
-  
-  
-  <p>
-    맵 <code>m</code> 의 요소를 삽입하거나 수정하기:
-  </p>
-  
-
-  
-  <pre>m[key] = elem</pre>
-  
-
-  
-  <p>
-    요소 값 가져오기:
-  </p>
-  
-
-  
-  <pre>elem = m[key]</pre>
-  
-
-  
-  <p>
-    요소 지우기:
-  </p>
-  
-
-  
-  <pre>delete(m, key)</pre>
-  
-
-  
-  <p>
-    키의 존재 여부 확인하기:
-  </p>
-  
-
-  
-  <pre>elem, ok = m[key]</pre>
-  
-
-  
-  <p>
-    위의 <code>ok</code> 의 값은 <code>m</code> 에 <code>key</code> 가 존재한다면 <code>true</code> 존재하지 않으면 <code>false</code>, <code>elem</code> 은 타입에 따라 _0(zero value)_ 가 됩니다.
-  </p>
-  
-
-  
-  <p>
-    이처럼 <code>map</code> 을 읽을 때, 존재하지 않는 <code>key</code> 의 반환 값은 타입에 맞는 _zero value_ 입니다.
-  </p>
-  
-
-  <div class="source"><!--{{.play prog/mutating-maps.go}}
---><pre style="display: none"></pre><pre>package main
-
-import &#34;fmt&#34;
-
-func main() {
-    m := make(map[string]int)
-
-    m[&#34;Answer&#34;] = 42
-    fmt.Println(&#34;The value:&#34;, m[&#34;Answer&#34;])
-
-    m[&#34;Answer&#34;] = 48
-    fmt.Println(&#34;The value:&#34;, m[&#34;Answer&#34;])
-
-    delete(m, &#34;Answer&#34;)
-    fmt.Println(&#34;The value:&#34;, m[&#34;Answer&#34;])
-
-    v, ok := m[&#34;Answer&#34;]
-    fmt.Println(&#34;The value:&#34;, v, &#34;Present?&#34;, ok)
 }
 </pre><pre style="display: none"></pre></div>
 
@@ -1555,6 +1391,385 @@ func main() {
 
 <div class="slide">
 	
+  <h2>레인지 (Range, 범위)</h2>
+  
+  
+  <p>
+    <code>for</code> 반복문에서 <code>range</code> 를 사용하면 슬라이스나 맵을 순회(iterates)할 수 있습니다.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/range.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+var pow = []int{1, 2, 4, 8, 16, 32, 64, 128}
+
+func main() {
+    for i, v := range pow {
+        fmt.Printf(&#34;2**%d = %d\n&#34;, i, v)
+    }
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>레인지 (2)</h2>
+  
+  
+  <p>
+    <code>_</code> 를 이용해서 인덱스(index)나 값(value)를 무시할 수 있습니다.
+  </p>
+  
+
+  
+  <p>
+    만약 인덱스만 필요하다면 “ `, value` ” 부분을 다 제거하면 됩니다.
+  </p>
+  
+
+  
+  <pre>for i, value := range pow {
+	pow[i] = 1 &lt;&lt; uint(i)
+}</pre>
+  
+
+  
+  <p>
+    에서
+  </p>
+  
+
+  
+  <pre>for i := range pow {
+	pow[i] = 1 &lt;&lt; uint(i)
+}</pre>
+  
+
+  
+  <p>
+    처럼 사용할 수 있습니다.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/range-continued.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+func main() {
+    pow := make([]int, 10)
+    for i := range pow {
+        pow[i] = 1 &lt;&lt; uint(i)
+    }
+    for _, value := range pow {
+        fmt.Printf(&#34;%d\n&#34;, value)
+    }
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Exercise: Slices</h2>
+  
+  
+  <p>
+    Implement <code>Pic</code> . It should return a slice of length <code>dy</code> , each element of which is a slice of <code>dx</code> 8-bit unsigned integers. When you run the program, it will display your picture, interpreting the integers as grayscale (well, bluescale) values.
+  </p>
+  
+
+  
+  <p>
+    The choice of image is up to you. Interesting functions include <code>x^y</code>, <code>(x+y)/2</code>, and <code>x*y</code> .
+  </p>
+  
+
+  
+  <p>
+    (You need to use a loop to allocate each <code>[]uint8</code> inside the <code>[][]uint8</code>.)
+  </p>
+  
+
+  
+  <p>
+    (Use <code>uint8(intValue)</code> to convert between types.)
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/exercise-slices.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;code.google.com/p/go-tour/pic&#34;
+
+func Pic(dx, dy int) [][]uint8 {
+}
+
+func main() {
+    pic.Show(Pic)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>맵 (Maps)</h2>
+  
+  
+  <p>
+    맵은 값에 키를 지정합니다.
+  </p>
+  
+
+  
+  <p>
+    맵은 반드시 사용하기 전에 <code>make</code> 를 명시해야합니다. (주의: <code>new</code> 가 아닙니다)
+  </p>
+  
+
+  
+  <p>
+    <code>make</code> 를 수행하지 않은 <code>nil</code> 에는 값을 할당할 수 없습니다.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/maps.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+type Vertex struct {
+    Lat, Long float64
+}
+
+var m map[string]Vertex
+
+func main() {
+    m = make(map[string]Vertex)
+    m[&#34;Bell Labs&#34;] = Vertex{
+        40.68433, -74.39967,
+    }
+    fmt.Println(m[&#34;Bell Labs&#34;])
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>맵 리터럴 (Map literals)</h2>
+  
+  
+  <p>
+    맵 리터럴은 구조체 리터럴과 비슷하지만 <code>key</code> 를 반드시 지정해야 합니다.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/map-literals.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+type Vertex struct {
+    Lat, Long float64
+}
+
+var m = map[string]Vertex{
+    &#34;Bell Labs&#34;: Vertex{
+        40.68433, -74.39967,
+    },
+    &#34;Google&#34;: Vertex{
+        37.42202, -122.08408,
+    },
+}
+
+func main() {
+    fmt.Println(m)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>맵 리터럴 (2)</h2>
+  
+  
+  <p>
+    만약 가장 상위의 타입이 타입명이라면 리터럴에서 타입명을 생략해도 됩니다.
+  </p>
+  
+
+  
+  <pre>&#34;Bell Labs&#34;: {40.68433, -74.39967}</pre>
+  
+
+  
+  <p>
+    또는
+  </p>
+  
+
+  
+  <pre>&#34;Bell Labs&#34;: Vertex{40.68433, -74.39967}</pre>
+  
+
+  
+  <p>
+    는 같은 표현입니다.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/map-literals-continued.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+type Vertex struct {
+    Lat, Long float64
+}
+
+var m = map[string]Vertex{
+    &#34;Bell Labs&#34;: {40.68433, -74.39967},
+    &#34;Google&#34;:    {37.42202, -122.08408},
+}
+
+func main() {
+    fmt.Println(m)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>맵 다루기 (Mutating Maps)</h2>
+  
+  
+  <p>
+    맵 <code>m</code> 의 요소를 삽입하거나 수정하기:
+  </p>
+  
+
+  
+  <pre>m[key] = elem</pre>
+  
+
+  
+  <p>
+    요소 값 가져오기:
+  </p>
+  
+
+  
+  <pre>elem = m[key]</pre>
+  
+
+  
+  <p>
+    요소 지우기:
+  </p>
+  
+
+  
+  <pre>delete(m, key)</pre>
+  
+
+  
+  <p>
+    키의 존재 여부 확인하기:
+  </p>
+  
+
+  
+  <pre>elem, ok = m[key]</pre>
+  
+
+  
+  <p>
+    위의 <code>ok</code> 의 값은 <code>m</code> 에 <code>key</code> 가 존재한다면 <code>true</code> 존재하지 않으면 <code>false</code> , <code>elem</code> 은 타입에 따라 <i>0(zero value)</i> 가 됩니다.
+  </p>
+  
+
+  
+  <p>
+    이처럼 <code>map</code> 을 읽을 때, 존재하지 않는 <code>key</code> 의 반환 값은 타입에 맞는 <i>zero value</i> 입니다.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/mutating-maps.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import &#34;fmt&#34;
+
+func main() {
+    m := make(map[string]int)
+
+    m[&#34;Answer&#34;] = 42
+    fmt.Println(&#34;The value:&#34;, m[&#34;Answer&#34;])
+
+    m[&#34;Answer&#34;] = 48
+    fmt.Println(&#34;The value:&#34;, m[&#34;Answer&#34;])
+
+    delete(m, &#34;Answer&#34;)
+    fmt.Println(&#34;The value:&#34;, m[&#34;Answer&#34;])
+
+    v, ok := m[&#34;Answer&#34;]
+    fmt.Println(&#34;The value:&#34;, v, &#34;Present?&#34;, ok)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>Exercise: Maps</h2>
+  
+  
+  <p>
+    Implement <code>WordCount</code> .  It should return a map of the counts of each “word” in the string <code>s</code> . The <code>wc.Test</code> function runs a test suite against the provided function and prints success or failure.
+  </p>
+  
+
+  
+  <p>
+    You might find <a href="http://golang.org/pkg/strings/#Fields" target="_blank">strings.Fields</a> helpful.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/exercise-maps.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;code.google.com/p/go-tour/wc&#34;
+)
+
+func WordCount(s string) map[string]int {
+    return map[string]int{&#34;x&#34;: 1}
+}
+
+func main() {
+    wc.Test(WordCount)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
   <h2>함수 값 (Function values)</h2>
   
   
@@ -1640,95 +1855,34 @@ func main() {
 
 <div class="slide">
 	
-  <h2>레인지 (Range, 범위)</h2>
+  <h2>Exercise: Fibonacci closure</h2>
   
   
   <p>
-    <code>for</code> 반복문에서 <code>range</code> 를 사용하면 슬라이스나 맵을 순회(iterates)할 수 있습니다.
+    Let&apos;s have some fun with functions.
   </p>
   
 
-  <div class="source"><!--{{.play prog/range.go}}
+  
+  <p>
+    Implement a <code>fibonacci</code> function that returns a function (a closure) that returns successive fibonacci numbers.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/exercise-fibonacci-closure.go}}
 --><pre style="display: none"></pre><pre>package main
 
 import &#34;fmt&#34;
 
-var pow = []int{1, 2, 4, 8, 16, 32, 64, 128}
-
-func main() {
-    for i, v := range pow {
-        fmt.Printf(&#34;2**%d = %d\n&#34;, i, v)
-    }
+// fibonacci is a function that returns
+// a function that returns an int.
+func fibonacci() func() int {
 }
-</pre><pre style="display: none"></pre></div>
-
-
-</div>
-
-<div class="slide">
-	
-  <h2>레인지 (2)</h2>
-  
-  
-  <p>
-    <code>_</code> 를 이용해서 인덱스(index)나 값(value)를 무시할 수 있습니다.
-  </p>
-  
-
-  
-  <p>
-    만약 인덱스만 필요하다면 “ `, value` ” 부분을 다 제거하면 됩니다.
-  </p>
-  
-
-  
-  <pre>for i, value := range pow {</pre>
-  
-
-  
-  <pre>pow[i] = 1 &lt;&lt; uint(i)</pre>
-  
-
-  
-  <pre>}</pre>
-  
-
-  
-  <p>
-    에서
-  </p>
-  
-
-  
-  <pre>for i := range pow {</pre>
-  
-
-  
-  <pre>pow[i] = 1 &lt;&lt; uint(i)</pre>
-  
-
-  
-  <pre>}</pre>
-  
-
-  
-  <p>
-    처럼 사용할 수 있습니다.
-  </p>
-  
-
-  <div class="source"><!--{{.play prog/range-continued.go}}
---><pre style="display: none"></pre><pre>package main
-
-import &#34;fmt&#34;
 
 func main() {
-    pow := make([]int, 10)
-    for i := range pow {
-        pow[i] = 1 &lt;&lt; uint(i)
-    }
-    for _, value := range pow {
-        fmt.Printf(&#34;%d\n&#34;, value)
+    f := fibonacci()
+    for i := 0; i &lt; 10; i++ {
+        fmt.Println(f())
     }
 }
 </pre><pre style="display: none"></pre></div>
@@ -1882,179 +2036,6 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Exercise: Loops and Functions</h2>
-  
-  
-  <p>
-    As a simple way to play with functions and loops, implement the square root function using Newton&apos;s method.
-  </p>
-  
-
-  
-  <p>
-    In this case, Newton&apos;s method is to approximate <code>Sqrt(x)</code> by picking a starting point <i>z</i> and then repeating:
-  </p>
-  
-
-  
-  <p>
-    To begin with, just repeat that calculation 10 times and see how close you get to the answer for various values (1, 2, 3, ...).
-  </p>
-  
-
-  
-  <p>
-    Next, change the loop condition to stop once the value has stopped changing (or only changes by a very small delta). See if that&apos;s more or fewer iterations. How close are you to the <a href="http://golang.org/pkg/math/#Sqrt" target="_blank">math.Sqrt</a>?
-  </p>
-  
-
-  
-  <p>
-    Hint: to declare and initialize a floating point value, give it floating point syntax or use a conversion:
-  </p>
-  
-
-  
-  <pre>z := float64(1)
-z := 1.0</pre>
-  
-
-  <div class="source"><!--{{.play prog/exercise-loops-and-functions.go}}
---><pre style="display: none"></pre><pre>package main
-
-import (
-    &#34;fmt&#34;
-)
-
-func Sqrt(x float64) float64 {
-}
-
-func main() {
-    fmt.Println(Sqrt(2))
-}
-</pre><pre style="display: none"></pre></div>
-
-
-</div>
-
-<div class="slide">
-	
-  <h2>Exercise: Maps</h2>
-  
-  
-  <p>
-    Implement <code>WordCount</code>.  It should return a map of the counts of each “word” in the string <code>s</code>. The <code>wc.Test</code> function runs a test suite against the provided function and prints success or failure.
-  </p>
-  
-
-  
-  <p>
-    You might find <a href="http://golang.org/pkg/strings/#Fields" target="_blank">strings.Fields</a> helpful.
-  </p>
-  
-
-  <div class="source"><!--{{.play prog/exercise-maps.go}}
---><pre style="display: none"></pre><pre>package main
-
-import (
-    &#34;code.google.com/p/go-tour/wc&#34;
-)
-
-func WordCount(s string) map[string]int {
-    return map[string]int{&#34;x&#34;: 1}
-}
-
-func main() {
-    wc.Test(WordCount)
-}
-</pre><pre style="display: none"></pre></div>
-
-
-</div>
-
-<div class="slide">
-	
-  <h2>Exercise: Slices</h2>
-  
-  
-  <p>
-    Implement <code>Pic</code>. It should return a slice of length <code>dy</code>, each element of which is a slice of <code>dx</code> 8-bit unsigned integers. When you run the program, it will display your picture, interpreting the integers as grayscale (well, bluescale) values.
-  </p>
-  
-
-  
-  <p>
-    The choice of image is up to you. Interesting functions include <code>x^y</code>, <code>(x+y)/2</code>, and <code>x*y</code>.
-  </p>
-  
-
-  
-  <p>
-    (You need to use a loop to allocate each <code>[]uint8</code> inside the <code>[][]uint8</code>.)
-  </p>
-  
-
-  
-  <p>
-    (Use <code>uint8(intValue)</code> to convert between types.)
-  </p>
-  
-
-  <div class="source"><!--{{.play prog/exercise-slices.go}}
---><pre style="display: none"></pre><pre>package main
-
-import &#34;code.google.com/p/go-tour/pic&#34;
-
-func Pic(dx, dy int) [][]uint8 {
-}
-
-func main() {
-    pic.Show(Pic)
-}
-</pre><pre style="display: none"></pre></div>
-
-
-</div>
-
-<div class="slide">
-	
-  <h2>Exercise: Fibonacci closure</h2>
-  
-  
-  <p>
-    Let&apos;s have some fun with functions.
-  </p>
-  
-
-  
-  <p>
-    Implement a <code>fibonacci</code> function that returns a function (a closure) that returns successive fibonacci numbers.
-  </p>
-  
-
-  <div class="source"><!--{{.play prog/exercise-fibonacci-closure.go}}
---><pre style="display: none"></pre><pre>package main
-
-import &#34;fmt&#34;
-
-// fibonacci is a function that returns
-// a function that returns an int.
-func fibonacci() func() int {
-}
-
-func main() {
-    f := fibonacci()
-    for i := 0; i &lt; 10; i++ {
-        fmt.Println(f())
-    }
-}
-</pre><pre style="display: none"></pre></div>
-
-
-</div>
-
-<div class="slide">
-	
   <h2>Advanced Exercise: Complex cube roots</h2>
   
   
@@ -2087,14 +2068,14 @@ func main() {
 
 <div class="slide nocode">
 	
-  <h2>메소드(method)와 인터페이스(interface)</h2>
+  <h2>메소드와 인터페이스</h2>
   
 
 </div>
 
 <div class="slide">
 	
-  <h2>메소드</h2>
+  <h2>메소드 (Methods)</h2>
   
   
   <p>
@@ -2104,7 +2085,7 @@ func main() {
 
   
   <p>
-    <i>메소스 리시버(method receiver)</i> 는 <code>func</code> 키워드와 메소드의 이름 사이에 인자로 들어갑니다.
+    <i>메소드 리시버(method receiver)</i> 는 <code>func</code> 키워드와 메소드의 이름 사이에 인자로 들어갑니다.
   </p>
   
 
@@ -2135,7 +2116,7 @@ func main() {
 
 <div class="slide">
 	
-  <h2>메소드 계속</h2>
+  <h2>메소드 (2)</h2>
   
   
   <p>
@@ -2187,34 +2168,31 @@ func main() {
 
   
   <p>
-    방금 두 개의 <code>Abs</code> 메소르를 보았는데, 하나는 `*Vertex`라는 포인터 타입의 메소드고, 다른 하나는 <code>MyFloat</code> 값 타입의 메소드 입니다.
+    방금 두 개의 <code>Abs</code> 메소드를 보았는데, 하나는 <code>*Vertex</code> 라는 포인터 타입의 메소드고, 다른 하나는 <code>MyFloat</code> 값 타입의 메소드 입니다.
   </p>
   
 
   
   <p>
-    포인터 리시버를 사용하는 이유는 두 가지 입니다. 첫째, 매소드가 호출될 때 마다 값이 복사되는 것(큰 구조체 타입인 경우 값이 복사되는 것은 비효율적이죠)을 방지하기 위함 입니다. 다른 이유는 메소드에서 리시버 포인터가 가르키는 값을 수정하기 위함 입니다.
+    포인터 리시버를 사용하는 이유는 두 가지 입니다. 첫째, 메소드가 호출될 때 마다 값이 복사되는 것(큰 구조체 타입인 경우 값이 복사되는 것은 비효율적이죠)을 방지하기 위함 입니다. 다른 이유는 메소드에서 리시버 포인터가 가르키는 값을 수정하기 위함 입니다.
   </p>
   
 
   
   <p>
-    `*Vertex`타입의 리시버 대신 `Vertex`를 사용하도록 메소드 `Abs`와 `Scale`의 선언부분을 바꿔 보세요.
+    <code>*Vertex</code> 타입의 리시버 대신 <code>Vertex</code> 를 사용하도록 메소드 <code>Abs</code> 와 <code>Scale</code> 의 선언부분을 바꿔 보세요.
   </p>
   
 
   
   <p>
-    `v`를 `Vertex`타입으로 받으면 <code>Scale</code> 메소드가 더 이상 동작하지 않습니다. `Scale`은 `v`를 바꾸는데, `v`가 (포인터가 아닌) 값 타입이 때문에 `Vertex`타입인 복사본에 작업을 하기 때문에 원래의 값은 바뀌지 않습니다.
+    <code>v</code> 를 <code>Vertex</code> 타입으로 받으면 <code>Scale</code> 메소드가 더 이상 동작하지 않습니다. <code>Scale</code> 은 <code>v</code> 를 바꾸는데, <code>v</code> 가 (포인터가 아닌) 값 타입이기 때문에 <code>Vertex</code> 타입인 복사본에 작업을 하기 때문에 원래의 값은 바뀌지 않습니다.
   </p>
   
 
   
   <p>
-    <code>Abs</code> works either way. It only reads <code>v</code>. It doesn&apos;t matter whether it is reading the original value (through a pointer) or a copy of that value.
-
-
-    `Abs`의 경우는 다릅니다. 여기서는 `v`를 읽기만 하기 때문에, (포인터가 가르키는) 원래의 값이건 복사본이건 상관이 없게 됩니다.
+    <code>Abs</code> 의 경우는 다릅니다. 여기서는 <code>v</code> 를 읽기만 하기 때문에, (포인터가 가르키는) 원래의 값이건 복사본이건 상관이 없게 됩니다.
   </p>
   
 
@@ -2251,7 +2229,7 @@ func main() {
 
 <div class="slide">
 	
-  <h2>인터페이스</h2>
+  <h2>인터페이스 (Interface)</h2>
   
   
   <p>
@@ -2341,7 +2319,7 @@ func (v *Vertex) Abs() float64 {
 
   
   <p>
-    <a href="http://golang.org/pkg/io/" target="_blank">패키지 io</a>에 `Reader`와 `Writer`가 정의되어 있습니다. 따로 정의할 필요가 없습니다.
+    <a href="http://golang.org/pkg/io/" target="_blank">패키지 io</a>에 <code>Reader</code> 와 <code>Writer</code> 가 정의되어 있습니다. 따로 정의할 필요가 없습니다.
   </p>
   
 
@@ -2385,7 +2363,7 @@ func main() {
   
   
   <p>
-    에러 문장(string)으로 자신을 표현할 수 있는 것은 모두 에러입니다. 이 아이디어는 문자열(string)을 반환하는 하나의 메소드 `Error`로 구성된 내장 인터페이스 타입 `error`에서 나왔습니다.
+    에러 문장(string)으로 자신을 표현할 수 있는 것은 모두 에러입니다. 이 아이디어는 문자열(string)을 반환하는 하나의 메소드 <code>Error</code> 로 구성된 내장 인터페이스 타입 <code>error</code> 에서 나왔습니다.
   </p>
   
 
@@ -2397,7 +2375,7 @@ func main() {
 
   
   <p>
-    `fmt`패키지의 다양한 출력 루틴들은 `error`의 출력을 요청받았을 때 자동으로 이 메소드를 호출합니다.
+    <code>fmt</code> 패키지의 다양한 출력 루틴들은 <code>error</code> 의 출력을 요청받았을 때 자동으로 이 메소드를 호출합니다.
   </p>
   
 
@@ -2430,111 +2408,6 @@ func main() {
     if err := run(); err != nil {
         fmt.Println(err)
     }
-}
-</pre><pre style="display: none"></pre></div>
-
-
-</div>
-
-<div class="slide">
-	
-  <h2>웹 서버</h2>
-  
-  
-  <p>
-    <a href="http://golang.org/pkg/net/http/" target="_blank">Package http</a> 는 <code>http.Handler</code> 를 구현한 어떠 값을 사용하여 HTTP 요청(requests)을 제공합니다.
-  </p>
-  
-
-  
-  <pre>package http
-
-type Handler interface {
-	ServeHTTP(w ResponseWriter, r *Request)
-}</pre>
-  
-
-  
-  <p>
-    이 예제에서, <code>Hello</code> 라는 타입은 <code>http.Handler</code> 를 구현합니다.
-  </p>
-  
-
-  
-  <p>
-    이 코드를 로컬에서 실행하고, <a href="http://localhost:4000/" target="_blank">http://localhost:4000/</a> 에 접속해보세요.
-  </p>
-  
-
-  <div class="source"><!--{{.play prog/web-servers.go}}
---><pre style="display: none"></pre><pre>package main
-
-import (
-    &#34;fmt&#34;
-    &#34;net/http&#34;
-)
-
-type Hello struct{}
-
-func (h Hello) ServeHTTP(
-    w http.ResponseWriter,
-    r *http.Request) {
-    fmt.Fprint(w, &#34;Hello!&#34;)
-}
-
-func main() {
-    var h Hello
-    http.ListenAndServe(&#34;localhost:4000&#34;, h)
-}
-</pre><pre style="display: none"></pre></div>
-
-
-</div>
-
-<div class="slide">
-	
-  <h2>이미지</h2>
-  
-  
-  <p>
-    <a href="http://golang.org/pkg/image/#Image" target="_blank">Package image</a> 는 <code>Image</code> 인터페이스를 정의합니다.
-  </p>
-  
-
-  
-  <pre>package image
-
-type Image interface {
-	ColorModel() color.Model
-	Bounds() Rectangle
-	At(x, y int) color.Color
-}</pre>
-  
-
-  
-  <p>
-    (모든 세부사항에 대한 것은 <a href="http://golang.org/pkg/image/#Image" target="_blank">이 문서</a> 를 참고하십시오.)
-  </p>
-  
-
-  
-  <p>
-    또한, <code>color.Color</code> 와 <code>color.Model</code> 는 인터페이스이지만, 미리 정의된 구현체인 <code>color.RGBA</code> 와 <code>color.RGBAModel</code> 을 사용함으로써 그 인터페이스를 무시할 수 있습니다.
-  </p>
-  
-
-  <div class="source"><!--{{.play prog/images.go}}
---><pre style="display: none"></pre><pre>package main
-
-import (
-    &#34;fmt&#34;
-    &#34;image&#34;
-)
-
-func main() {
-    m := image.NewRGBA(image.Rect(0, 0, 100, 100))
-    fmt.Println(m.Bounds())
-    fmt.Println(m.At(0, 0).RGBA())
 }
 </pre><pre style="display: none"></pre></div>
 
@@ -2620,6 +2493,61 @@ func main() {
 
 <div class="slide">
 	
+  <h2>웹 서버</h2>
+  
+  
+  <p>
+    <a href="http://golang.org/pkg/net/http/" target="_blank">Package http</a> 는 <code>http.Handler</code> 를 구현한 어떠 값을 사용하여 HTTP 요청(requests)을 제공합니다.
+  </p>
+  
+
+  
+  <pre>package http
+
+type Handler interface {
+	ServeHTTP(w ResponseWriter, r *Request)
+}</pre>
+  
+
+  
+  <p>
+    이 예제에서, <code>Hello</code> 라는 타입은 <code>http.Handler</code> 를 구현합니다.
+  </p>
+  
+
+  
+  <p>
+    이 코드를 로컬에서 실행하고, <a href="http://localhost:4000/" target="_blank">http://localhost:4000/</a> 에 접속해보세요.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/web-servers.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;net/http&#34;
+)
+
+type Hello struct{}
+
+func (h Hello) ServeHTTP(
+    w http.ResponseWriter,
+    r *http.Request) {
+    fmt.Fprint(w, &#34;Hello!&#34;)
+}
+
+func main() {
+    var h Hello
+    http.ListenAndServe(&#34;localhost:4000&#34;, h)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
   <h2>연습: HTTP 핸들러</h2>
   
   
@@ -2659,6 +2587,56 @@ import (
 func main() {
     // your http.Handle calls here
     http.ListenAndServe(&#34;localhost:4000&#34;, nil)
+}
+</pre><pre style="display: none"></pre></div>
+
+
+</div>
+
+<div class="slide">
+	
+  <h2>이미지</h2>
+  
+  
+  <p>
+    <a href="http://golang.org/pkg/image/#Image" target="_blank">Package image</a> 는 <code>Image</code> 인터페이스를 정의합니다.
+  </p>
+  
+
+  
+  <pre>package image
+
+type Image interface {
+	ColorModel() color.Model
+	Bounds() Rectangle
+	At(x, y int) color.Color
+}</pre>
+  
+
+  
+  <p>
+    (모든 세부사항에 대한 것은 <a href="http://golang.org/pkg/image/#Image" target="_blank">이 문서</a> 를 참고하십시오.)
+  </p>
+  
+
+  
+  <p>
+    또한, <code>color.Color</code> 와 <code>color.Model</code> 는 인터페이스이지만, 미리 정의된 구현체인 <code>color.RGBA</code> 와 <code>color.RGBAModel</code> 을 사용함으로써 그 인터페이스를 무시할 수 있습니다.
+  </p>
+  
+
+  <div class="source"><!--{{.play prog/images.go}}
+--><pre style="display: none"></pre><pre>package main
+
+import (
+    &#34;fmt&#34;
+    &#34;image&#34;
+)
+
+func main() {
+    m := image.NewRGBA(image.Rect(0, 0, 100, 100))
+    fmt.Println(m.Bounds())
+    fmt.Println(m.At(0, 0).RGBA())
 }
 </pre><pre style="display: none"></pre></div>
 
@@ -2803,7 +2781,7 @@ func main() {
 
   
   <p>
-    현재의 고루틴에서 <code>f</code>, <code>x</code>, <code>y</code>, `z`가 평가(evaluation)되고, 새로운 고루틴에서 `f`가 수행(execution)됩니다.
+    현재의 고루틴에서 <code>f</code> , <code>x</code> , <code>y</code> , <code>z</code> 가 평가(evaluation)되고, 새로운 고루틴에서 <code>f</code> 가 수행(execution)됩니다.
   </p>
   
 
@@ -2909,7 +2887,7 @@ func main() {
   
   
   <p>
-    채널은 _버퍼링_될 수 있습니다. `make`에 두번째 인자로 버퍼 용량을 넣음으로써 해당 용량만큼 버퍼링되는 채널을 생성할 수 있습니다:
+    채널은 _버퍼링_될 수 있습니다. <code>make</code> 에 두번째 인자로 버퍼 용량을 넣음으로써 해당 용량만큼 버퍼링되는 채널을 생성할 수 있습니다:
   </p>
   
 
@@ -2952,7 +2930,7 @@ func main() {
   
   
   <p>
-    데이터 송신측은 더이상 보낼 값이 없다는 것을 알리기 위해 채널을 `close`할 수 있습니다. 수신측은 다음과 같이 수신 코드에 두번째 인자를 줌으로써 채널이 닫혔는지 테스트 할 수 있습니다.
+    데이터 송신측은 더이상 보낼 값이 없다는 것을 알리기 위해 채널을 <code>close</code> 할 수 있습니다. 수신측은 다음과 같이 수신 코드에 두번째 인자를 줌으로써 채널이 닫혔는지 테스트 할 수 있습니다.
   </p>
   
 
@@ -2962,7 +2940,7 @@ func main() {
 
   
   <p>
-    채널이 이미 닫혔고 더이상 받을 값이 없다면 `ok`는 `false`가 됩니다.
+    채널이 이미 닫혔고 더이상 받을 값이 없다면 <code>ok</code> 는 <code>false</code> 가 됩니다.
   </p>
   
 
@@ -3024,7 +3002,7 @@ func main() {
 
   
   <p>
-    `select`는 `case`구문으로 받는 통신 동작들 중 하나가 수행될 수 있을 때까지 수행을 블록합니다. 다수의 채널이 동시에 준비되면 그 중 하나를 무작위로 선택합니다.
+    <code>select</code> 는 <code>case</code> 구문으로 받는 통신 동작들 중 하나가 수행될 수 있을 때까지 수행을 블록합니다. 다수의 채널이 동시에 준비되면 그 중 하나를 무작위로 선택합니다.
   </p>
   
 
@@ -3068,7 +3046,7 @@ func main() {
   
   
   <p>
-    `select`의 <code>default</code> 케이스는 현재 수행 준비가 완료된 케이스가 없을 때 수행됩니다.
+    <code>select</code> 의 <code>default</code> 케이스는 현재 수행 준비가 완료된 케이스가 없을 때 수행됩니다.
   </p>
   
 
@@ -3134,7 +3112,7 @@ func main() {
 
   
   <p>
-    이 예제는 다음의 `Tree`구조체가 정의된 `tree`패키지를 사용합니다.
+    이 예제는 다음의 <code>Tree</code> 구조체가 정의된 <code>tree</code> 패키지를 사용합니다.
   </p>
   
 
@@ -3167,13 +3145,13 @@ func main() {
 
   
   <p>
-    함수 `tree.New(k)`는 <code>k</code>, <code>2k</code>, <code>3k</code>, ..., `10k`의 값을 가지는, 무작위로 구성된 이진트리를 만들어 냅니다.
+    함수 `tree.New(k)`는 <code>k</code> , <code>2k</code> , <code>3k</code> , ..., <code>10k</code> 의 값을 가지는, 무작위로 구성된 이진트리를 만들어 냅니다.
   </p>
   
 
   
   <p>
-    채널 `ch`를 만들고, 작성한 `Walk`함수의 인자로 넣어 줍니다.
+    채널 <code>ch</code> 를 만들고, 작성한 <code>Walk</code> 함수의 인자로 넣어 줍니다.
   </p>
   
 
@@ -3189,7 +3167,7 @@ func main() {
 
   
   <p>
-    <b>3.</b> <code>Walk</code> 함수를 사용해 두 트리 `t1`과 `t2`이 값은 값들을 가지고 있는지 비교하는 `Same`함수를 구현해 보세요.
+    <b>3.</b> <code>Walk</code> 함수를 사용해 두 트리 <code>t1</code> 과 <code>t2</code> 이 값은 값들을 가지고 있는지 비교하는 <code>Same</code> 함수를 구현해 보세요.
   </p>
   
 
