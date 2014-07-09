@@ -2039,17 +2039,19 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Advanced Exercise: Complex cube roots</h2>
+  <h2>심화 연습: 복소수 세제곱근</h2>
   
   
   <p>
-    Let&apos;s explore Go&apos;s built-in support for complex numbers via the <code>complex64</code> and <code>complex128</code> types. For cube roots, Newton&apos;s method amounts to repeating:
+    <code>complex64</code> 타입과 <code>complex128</code> 타입을 통해서 Go 언어의 복소수 지원 기능을 알아봅니다. 세제곱근을 얻기 위해서는, 뉴턴의 방법 (Newton&apos;s method)을 적용하여 다음을 반복 수행합니다:
   </p>
   
-
+  <p>
+    z = z - (z * z * z - x) / (3 * z * z)
+  </p>
   
   <p>
-    Find the cube root of 2, just to make sure the algorithm works. There is a <a href="http://golang.org/pkg/math/cmplx/#Pow" target="_blank">Pow</a> function in the <code>math/cmplx</code> package.
+    알고리즘이 잘 동작하는지 확인하기 위해 2의 세제곱근을 구해봅시다. <code>math/cmplx</code> 패키지에는 <a href="http://golang.org/pkg/math/cmplx/#Pow" target="_blank">Pow</a> 함수가 있습니다.
   </p>
   
 
