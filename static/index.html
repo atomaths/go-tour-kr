@@ -362,7 +362,7 @@ func main() {
   
 
   
-  <pre>x, y</pre>
+  <pre>x, y int</pre>
   
 
   <div class="source"><!--{{.play prog/functions-continued.go}}
@@ -559,7 +559,7 @@ func main() {
 
   
   <p>
-    상수는 문자(character), 문자열(string), 부울(boolean) 등(values)일 수 있습니다.
+    상수는 문자(character), 문자열(string), 부울(boolean), 숫자 타입 중의 하나가 될 수 있습니다.
   </p>
   
 
@@ -751,7 +751,7 @@ func main() {
   
   
   <p>
-    <code>if</code> 문은 C와 Java와 비슷합니다. 조건 표현을 을 위해 <code>( )</code> 는 사용하지 않습니다. 하지만 실행문을 위한 <code>{ }</code> 는 반드시 작성해야합니다.
+    <code>if</code> 문은 C와 Java와 비슷합니다. 조건 표현을 위해 <code>( )</code> 는 사용하지 않습니다. 하지만 실행문을 위한 <code>{ }</code> 는 반드시 작성해야합니다.
   </p>
   
 
@@ -879,35 +879,38 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Exercise: Loops and Functions</h2>
-  
+  <h2>연습: 루프와 함수</h2>
+
   
   <p>
-    As a simple way to play with functions and loops, implement the square root function using Newton&apos;s method.
+    함수와 루프의 사용법을 익히는 간단한 연습으로, 제곱근 함수를 뉴턴의 방법(Newton&apos;s method)을 이용하여 구현합니다.
   </p>
   
 
   
   <p>
-    In this case, Newton&apos;s method is to approximate <code>Sqrt(x)</code> by picking a starting point <i>z</i> and then repeating:
+    여기서 뉴턴의 방법이란 초기값 <i>z</i>를 선택한 후에 다음의 공식을 이용하여 반복적으로 <code>Sqrt(x)</code> 함수의 근사값을 찾아가는 방법을 말합니다:
+  </p>
+  
+  <p>
+    z = z - (z * z - x) / (2 * z)
+  </p>
+
+  
+  <p>
+    처음에는 계산을 10번만 반복하여 여러분이 작성한 함수가 다양한 값들 (1, 2, 3, ...)에 대하여 얼마나 정확한 값을 찾아내는지 확인합니다.
   </p>
   
 
   
   <p>
-    To begin with, just repeat that calculation 10 times and see how close you get to the answer for various values (1, 2, 3, ...).
+    그 다음에는, 루프의 조건을 수정하여 값이 더이상 바뀌지 않을 때 (혹은 아주 작은 차이가 발생할 때) 루프를 종료하도록 합니다. 이렇게 하면 반복문의 실행 횟수가 어떻게 달라지는지 확인합니다. 결과값이 <a href="http://golang.org/pkg/math/#Sqrt" target="_blank">math.Sqrt</a> 함수의 값과 얼마나 비슷한가요?                                                   
   </p>
   
 
   
   <p>
-    Next, change the loop condition to stop once the value has stopped changing (or only changes by a very small delta). See if that&apos;s more or fewer iterations. How close are you to the <a href="http://golang.org/pkg/math/#Sqrt" target="_blank">math.Sqrt</a>?
-  </p>
-  
-
-  
-  <p>
-    Hint: to declare and initialize a floating point value, give it floating point syntax or use a conversion:
+    힌트: 실수(floating point)값을 선언하고 초기화 하려면, 실수값을 표현하는 문법을 사용하거나 변환 함수를 사용합니다:
   </p>
   
 
@@ -1477,29 +1480,29 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Exercise: Slices</h2>
+  <h2>연습: 슬라이스</h2>
   
   
   <p>
-    Implement <code>Pic</code> . It should return a slice of length <code>dy</code> , each element of which is a slice of <code>dx</code> 8-bit unsigned integers. When you run the program, it will display your picture, interpreting the integers as grayscale (well, bluescale) values.
+    <code>Pic</code>이라는 함수를 구현합니다. 이 함수는 <code>dy</code>개 만큼의 길이를 가지는 슬라이스를 리턴해야 하는데, 각각의 요소들은 또한 <code>dx</code> 개의 8비트 부호없는 8비트 정수 타입을 가지는 슬라이스입니다. 프로그램을 실행하면 이 정수값들을 흑백 (사실은 파란색)을 나타내는 값으로 해석하여 그림을 보여줄 것입니다.
   </p>
   
 
   
   <p>
-    The choice of image is up to you. Interesting functions include <code>x^y</code>, <code>(x+y)/2</code>, and <code>x*y</code> .
+    그림은 여러분이 원하는 것으로 선택할 수 있습니다. (이용할 수 있는) 흥미로운 함수로는 <code>x^y</code>, <code>(x+y)/2</code>, <code>x*y</code> 등이 있습니다.
   </p>
   
 
   
   <p>
-    (You need to use a loop to allocate each <code>[]uint8</code> inside the <code>[][]uint8</code>.)
+    (여러분은 <code>[][]uint8</code> 슬라이스 내에서 사용할 각각의 <code>[]uint8</code> 슬라이스를 할당하기 위해 루프를 활용해야 할 것입니다.)
   </p>
   
 
   
   <p>
-    (Use <code>uint8(intValue)</code> to convert between types.)
+    (타입 간의 변환을 위해서는 <code>uint8(intValue)</code>을 사용합니다.)
   </p>
   
 
@@ -1735,17 +1738,17 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Exercise: Maps</h2>
+  <h2>연습: 맵</h2>
   
   
   <p>
-    Implement <code>WordCount</code> .  It should return a map of the counts of each “word” in the string <code>s</code> . The <code>wc.Test</code> function runs a test suite against the provided function and prints success or failure.
+    <code>WordCount</code> 함수를 구현합니다. 이 함수는 <code>s</code>라는 문자열 내에서 각각의 "단어"의 등장 횟수를 나타내는 맵을 반환해야 합니다. <code>wc.Test</code> 함수는 주어진 함수를 이용하여 테스트를 실행한 뒤에 그 성공 여부를 출력해 줍니다.
   </p>
   
 
   
   <p>
-    You might find <a href="http://golang.org/pkg/strings/#Fields" target="_blank">strings.Fields</a> helpful.
+    아마도 다음 링크 (<a href="http://golang.org/pkg/strings/#Fields" target="_blank">strings.Fields</a>)의 내용이 도움이 될 것입니다.
   </p>
   
 
@@ -1855,17 +1858,17 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Exercise: Fibonacci closure</h2>
+  <h2>연습: 피보나치 클로져</h2>
   
   
   <p>
-    Let&apos;s have some fun with functions.
+    함수를 가지고 놀아봅시다.
   </p>
   
 
   
   <p>
-    Implement a <code>fibonacci</code> function that returns a function (a closure) that returns successive fibonacci numbers.
+    <code>fibonacci</code> 함수를 구현합니다. 이 함수는 이어지는 피보나치 수를 반환하는 함수 (클로져)를 반환해야 합니다.
   </p>
   
 
@@ -2036,17 +2039,19 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Advanced Exercise: Complex cube roots</h2>
+  <h2>심화 연습: 복소수 세제곱근</h2>
   
   
   <p>
-    Let&apos;s explore Go&apos;s built-in support for complex numbers via the <code>complex64</code> and <code>complex128</code> types. For cube roots, Newton&apos;s method amounts to repeating:
+    <code>complex64</code> 타입과 <code>complex128</code> 타입을 통해서 Go 언어의 복소수 지원 기능을 알아봅니다. 세제곱근을 얻기 위해서는, 뉴턴의 방법 (Newton&apos;s method)을 적용하여 다음을 반복 수행합니다:
   </p>
   
-
+  <p>
+    z = z - (z * z * z - x) / (3 * z * z)
+  </p>
   
   <p>
-    Find the cube root of 2, just to make sure the algorithm works. There is a <a href="http://golang.org/pkg/math/cmplx/#Pow" target="_blank">Pow</a> function in the <code>math/cmplx</code> package.
+    알고리즘이 잘 동작하는지 확인하기 위해 2의 세제곱근을 구해봅시다. <code>math/cmplx</code> 패키지에는 <a href="http://golang.org/pkg/math/cmplx/#Pow" target="_blank">Pow</a> 함수가 있습니다.
   </p>
   
 
