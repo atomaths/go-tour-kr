@@ -1480,29 +1480,29 @@ func main() {
 
 <div class="slide">
 	
-  <h2>Exercise: Slices</h2>
+  <h2>연습: 슬라이스</h2>
   
   
   <p>
-    Implement <code>Pic</code> . It should return a slice of length <code>dy</code> , each element of which is a slice of <code>dx</code> 8-bit unsigned integers. When you run the program, it will display your picture, interpreting the integers as grayscale (well, bluescale) values.
+    <code>Pic</code>이라는 함수를 구현합니다. 이 함수는 <code>dy</code>개 만큼의 길이를 가지는 슬라이스를 리턴해야 하는데, 각각의 요소들은 또한 <code>dx</code> 개의 8비트 부호없는 8비트 정수 타입을 가지는 슬라이스입니다. 프로그램을 실행하면 이 정수값들을 흑백 (사실은 파란색)을 나타내는 값으로 해석하여 그림을 보여줄 것입니다.
   </p>
   
 
   
   <p>
-    The choice of image is up to you. Interesting functions include <code>x^y</code>, <code>(x+y)/2</code>, and <code>x*y</code> .
+    그림은 여러분이 원하는 것으로 선택할 수 있습니다. (이용할 수 있는) 흥미로운 함수로는 <code>x^y</code>, <code>(x+y)/2</code>, <code>x*y</code> 등이 있습니다.
   </p>
   
 
   
   <p>
-    (You need to use a loop to allocate each <code>[]uint8</code> inside the <code>[][]uint8</code>.)
+    (여러분은 <code>[][]uint8</code> 슬라이스 내에서 사용할 각각의 <code>[]uint8</code> 슬라이스를 할당하기 위해 루프를 활용해야 할 것입니다.)
   </p>
   
 
   
   <p>
-    (Use <code>uint8(intValue)</code> to convert between types.)
+    (타입 간의 변환을 위해서는 <code>uint8(intValue)</code>을 사용합니다.)
   </p>
   
 
